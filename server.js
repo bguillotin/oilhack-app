@@ -11,11 +11,8 @@ const handle = nextApp.getRequestHandler();
 
 // Load environment variables from .env
 require('dotenv').load()
-const { version } = require('./package.json');
 
 const { VIMEO_ID, VIMEO_SECRET, VIMEO_TOKEN } = process.env;
-console.log('Here is values for  VCID', VIMEO_ID);
-
 const clientV = new Vimeo(VIMEO_ID, VIMEO_SECRET, VIMEO_TOKEN);
 
 nextApp.prepare()
