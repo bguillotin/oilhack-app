@@ -1,6 +1,7 @@
 import Header from '../js/Header';
 import Footer from '../js/Footer';
-import io from 'socket.io-client';
+import Vimeo from '@u-wave/react-vimeo';
+// import io from 'socket.io-client';
 import 'isomorphic-unfetch';
 
 class Home extends React.PureComponent {
@@ -11,26 +12,12 @@ class Home extends React.PureComponent {
         };
     }
 
-    async componentDidMount() {
-        this.socket = io();
-        this.socket.on('now', data => {
-            this.setState({
-                version: data.message,
-            });
-        });
-
-        const res = await fetch('https://api.github.com/repos/developit/preact');
-        const json = await res.json();
-
-        this.setState({ stars: json.stargazers_count});
-    }
-
     render() {
         return (    
             <div>
                 <Header/>
-                <p>Welcome to Oilhack Website ! Running now on node Server with <b>{this.state.stars}</b> stars!!</p>
-                <p><img src="/static/images/screenshot.png"></img></p>
+                <p>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</p>
+                <Vimeo video="293552637" autoplay muted={true} loop={true}/>
                 <Footer version={this.state.version}/>
             </div>
         )
