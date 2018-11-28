@@ -1,40 +1,28 @@
-import Header from '../js/Header';
-import Footer from '../js/Footer';
-import io from 'socket.io-client';
+import Header from '../js/components/Header';
+import Footer from '../js/components/Footer';
+import Vimeo from '@u-wave/react-vimeo';
+import { connect } from 'react-redux';
 import 'isomorphic-unfetch';
+import { ACTION_TYPES } from '../js/constants/constants';
 
 class Home extends React.PureComponent {
-    constructor() {
-        super();
-        this.state = {
-            version: '',
-        };
-    }
-
-    async componentDidMount() {
-        this.socket = io();
-        this.socket.on('now', data => {
-            this.setState({
-                version: data.message,
-            });
-        });
-
-        const res = await fetch('https://api.github.com/repos/developit/preact');
-        const json = await res.json();
-
-        this.setState({ stars: json.stargazers_count});
+    constructor(props) {
+        super(props);
     }
 
     render() {
         return (    
             <div>
                 <Header/>
-                <p>Welcome to Oilhack Website ! Running now on node Server with <b>{this.state.stars}</b> stars!!</p>
-                <p><img src="/static/images/screenshot.png"></img></p>
-                <Footer version={this.state.version}/>
+                <p>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</p>
+                <Vimeo video="293552637" autoplay muted={true} loop={true}/>
+                <Footer/>
             </div>
         )
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({ version: state.version });
+
+// export default Home;
+export default connect(mapStateToProps)(Home);
