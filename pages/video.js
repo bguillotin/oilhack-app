@@ -2,32 +2,19 @@ import Link from 'next/link'
 import Header from '../js/components/Header';
 import Footer from '../js/components/Footer';
 import 'isomorphic-unfetch';
+import { setVideoList } from '../js/action';
+import { connect } from 'react-redux';
+import { mapVideoListUrl } from '../js/utils/video-utils';
 
 class Video extends React.PureComponent {
-  constructor() {
-      super();
-      this.state = {
-          videos: [],
-          total: 0,
-      }
-  }
-
   async componentDidMount() {
+    if (!this.props.videoList || this.props.videoList.length === 0 ) {
       const res = await fetch('/vimeo');
       const json = await res.json();
-      let videos = json.data;
-      videos = videos.map((element) => {
-        let videoId = element.uri.split(/\//)[2];
-        const newProperty = {
-          url: 'https://vimeo.com/'.concat(videoId),
-          id: videoId,
-        }
-        Object.assign(element, newProperty);
-        return element;
-      })
-      
-      this.setState({total: json.total});
-      this.setState({videos: videos});
+
+      // Set State with video list and proper Url. 
+      this.props.setVideoList(mapVideoListUrl(json.data));
+    }
   }
 
   render() {
@@ -35,10 +22,10 @@ class Video extends React.PureComponent {
         <div>
           <Header/>
           <p>This is the Videos page</p>
-          <p>The number of Videos is :: { this.state.total }</p>
+          <p>The number of Videos is :: { this.props.videoList ? this.props.videoList.length : 0 }</p>
         
           <ul>
-            { this.state.videos.map((element) => <li key={element.uri}><Link href={element.url}><a target="_blank">{element.name}</a></Link></li>)}
+            { this.props.videoList.map((element) => <li key={element.uri}><Link href={element.url}><a target="_blank">{element.name}</a></Link></li>)}
           </ul>
           <Link href='/'><a>Go home</a></Link>
           <Footer/>
@@ -47,4 +34,8 @@ class Video extends React.PureComponent {
   }
 }
 
-export default Video;
+const mapDispatchToProps = (dispatch) => ({ setVideoList: (videoList) => dispatch(setVideoList(videoList)), })
+
+const mapStateToProps = (state) => ({ videoList: state.videoList, })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Video);

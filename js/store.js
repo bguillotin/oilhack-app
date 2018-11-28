@@ -4,10 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import { ACTION_TYPES } from './constants/action-types';
 import { fromJS } from 'immutable'; 
 
-export const actionTypes = {};
-
 const initialState = fromJS({
     version: undefined,
+    videoList: [],
 });
 
 // REDUCERS
@@ -18,7 +17,12 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 version : action.version,
             }
-
+        case ACTION_TYPES.SET_VIDEO_LIST:
+            return {
+                ...state,
+                videoList: action.videoList,
+            }
+            
         default: return state
     }
 }

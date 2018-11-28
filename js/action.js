@@ -7,6 +7,14 @@ const setVersion = (version) => {
     }
 }
 
+const setVideoList = (videoList) => {
+    return {
+        type: ACTION_TYPES.SET_VIDEO_LIST,
+        videoList,
+    }
+}
+
 export {
     setVersion,
+    setVideoList
 }

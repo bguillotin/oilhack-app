@@ -27,8 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
     setVersion : (version) => dispatch(setVersion(version)),
 });
 
-const mapStatesToProps = (state) => ({
+const mapStateToProps = (state) => ({
     version: state.version,
 });
 
-export default connect(mapStatesToProps, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps, mapDispatchToProps)(Footer);
