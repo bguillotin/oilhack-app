@@ -1,15 +1,13 @@
-import Header from '../js/Header';
-import Footer from '../js/Footer';
+import Header from '../js/components/Header';
+import Footer from '../js/components/Footer';
 import Vimeo from '@u-wave/react-vimeo';
-// import io from 'socket.io-client';
+import { connect } from 'react-redux';
 import 'isomorphic-unfetch';
+import { ACTION_TYPES } from '../js/constants/constants';
 
 class Home extends React.PureComponent {
-    constructor() {
-        super();
-        this.state = {
-            version: '',
-        };
+    constructor(props) {
+        super(props);
     }
 
     render() {
@@ -18,10 +16,13 @@ class Home extends React.PureComponent {
                 <Header/>
                 <p>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</p>
                 <Vimeo video="293552637" autoplay muted={true} loop={true}/>
-                <Footer version={this.state.version}/>
+                <Footer/>
             </div>
         )
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({ version: state.version });
+
+// export default Home;
+export default connect(mapStateToProps)(Home);

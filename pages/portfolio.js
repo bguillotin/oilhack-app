@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Header from '../js/Header';
-import Footer from '../js/Footer';
+import Header from '../js/components/Header';
+import Footer from '../js/components/Footer';
 
 export default () => (
   <div>

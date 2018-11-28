@@ -1,0 +1,15 @@
+HEADER_MENU : {
+    EN : {
+        HOME: "Home",
+        ART_WORK: "Art work",
+        PHOTOGRAPHY: "Photography",
+        PRINT: "Print",
+    },
+    FR : {
+        HOME: "Home",
+        ART_WORK: "Art work",
+        PHOTOGRAPHY: "Photographie",
+        PRINT: "Impression",
+    }
+
+}

@@ -2,7 +2,6 @@ const expressApp = require('express')();
 const server = require('http').Server(expressApp)
 const next = require('next');
 const { parse } = require('url');
-// const io = require('socket.io')(server);
 const Vimeo = require('vimeo').Vimeo;
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -14,9 +13,19 @@ require('dotenv').load()
 
 const { VIMEO_ID, VIMEO_SECRET, VIMEO_TOKEN } = process.env;
 const clientV = new Vimeo(VIMEO_ID, VIMEO_SECRET, VIMEO_TOKEN);
+// App version from package.json.
+const { version } = require('./package.json');
+
+// Send a message to cliente
+const messages = [];
 
 nextApp.prepare()
 .then(() => {
+    expressApp.get('/version', (req, res) => {
+        res.setHeader('content-type', 'application/json');
+        res.send({version : version});
+    });
+
     expressApp.get('/vimeo', (req, res) => {    
         clientV.request({
             path: '/me/appearances',
