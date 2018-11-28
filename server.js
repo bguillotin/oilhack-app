@@ -40,9 +40,6 @@ nextApp.prepare()
                 console.log(error);
             }
             
-            console.log('status code');
-            console.log(status_code);
-            
             res.setHeader('content-type', 'application/json');
             res.send(JSON.stringify(body));
         });             
@@ -50,7 +47,7 @@ nextApp.prepare()
 
     expressApp.get('*', (req, res) => {
         const parsedUrl = parse(req.url, true);
-        const { pathname, query } = parsedUrl;        
+        // const { pathname, query } = parsedUrl;        
         return handle(req, res);
     });
 

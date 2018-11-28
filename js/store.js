@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
-import { ACTION_TYPES } from './constants/constants';
+import { ACTION_TYPES } from './constants/action-types';
 import { fromJS } from 'immutable'; 
 
 export const actionTypes = {};

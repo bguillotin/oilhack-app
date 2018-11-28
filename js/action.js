@@ -1,4 +1,4 @@
-import { ACTION_TYPES } from './constants/constants';
+import { ACTION_TYPES } from './constants/action-types';
 
 const setVersion = (version) => {
     return {

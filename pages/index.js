@@ -3,7 +3,6 @@ import Footer from '../js/components/Footer';
 import Vimeo from '@u-wave/react-vimeo';
 import { connect } from 'react-redux';
 import 'isomorphic-unfetch';
-import { ACTION_TYPES } from '../js/constants/constants';
 
 class Home extends React.PureComponent {
     constructor(props) {
