@@ -1,12 +1,4 @@
 import Link from 'next/link';
-import Header from '../js/components/Header';
-import Footer from '../js/components/Footer';
+import MainLayout from '../js/components/MainLayout';
 
-export default () => (
-  <div>
-    <Header/>
-    <p>This is the about page</p>
-    <Link href='/'><a>Go home</a></Link>
-    <Footer/>
-  </div>
-)
+export default () => (<MainLayout><p>This is the about page</p><Link href='/'><a>Go home</a></Link></MainLayout>);

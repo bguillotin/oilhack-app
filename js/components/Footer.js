@@ -1,5 +1,13 @@
+import Video from './Video';
 import { connect } from 'react-redux';
 import { setVersion } from '../action';
+import injectSheet from 'react-jss';
+
+const styles = {
+    footer: {
+        backgroundColor: "#57EEF5",
+    },
+}
 
 class Footer extends React.PureComponent {
     async componentDidMount() {
@@ -11,24 +19,17 @@ class Footer extends React.PureComponent {
     }
 
     render() {
-        return(
-            <div>Here I am the footer // Web Site made by ArtFactWeb // version:{this.props.version}</div>
-        )
+        const {classes} = this.props;
+
+        return (
+            <footer className={classes.footer}>
+                Here I am the footer // Web Site made by ArtFactWeb // version:{this.props.version}
+                <Video src="http://wearecolorful.net/wp-content/uploads/2017/05/10.mp4"/>
+            </footer>);
     }
 }
-// Equivalent to next Line.
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         setVersion : (version) => dispatch(setVersion(version)),
-//     };
-// };
 
-const mapDispatchToProps = (dispatch) => ({
-    setVersion : (version) => dispatch(setVersion(version)),
-});
+const mapDispatchToProps = (dispatch) => ({ setVersion : (version) => dispatch(setVersion(version)), });
+const mapStateToProps = (state) => ({ version: state.version, });
 
-const mapStateToProps = (state) => ({
-    version: state.version,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Footer);
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(Footer));
