@@ -46,7 +46,7 @@ class Header extends React.Component {
 
         return (
             <header className={classes.header}>
-                <Video src="http://wearecolorful-print.com/wp-content/uploads/2017/06/1.mp4" />
+                <Video src="http://wearecolorful.net/wp-content/uploads/2017/05/10.mp4" />
                 <nav className={classes.nav}>
                     <ul className={classes.topMenu}>
                         <li><Link href='/video'><a>{this.toUpperCase('Videos')}</a></Link></li>
