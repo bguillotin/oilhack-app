@@ -4,12 +4,14 @@ import thunkMiddleware from 'redux-thunk'
 import { ACTION_TYPES } from './constants/action-types';
 import { fromJS } from 'immutable'; 
 
+// INITIAL STATE.
 const initialState = fromJS({
     version: undefined,
     videoList: [],
+    isStickyHeader: false,
 });
 
-// REDUCERS
+// REDUCERS.
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPES.SET_VERSION:
@@ -22,7 +24,12 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 videoList: action.videoList,
             }
-            
+        
+        case ACTION_TYPES.SET_STICKY_HEADER:
+            return {
+                ...state,
+                isStickyHeader: action.isStickyHeader,
+            }
         default: return state
     }
 }

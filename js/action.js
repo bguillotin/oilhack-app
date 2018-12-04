@@ -7,6 +7,13 @@ const setVersion = (version) => {
     }
 }
 
+const setStickyHeader = (isStickyHeader) => {
+    return {
+        type: ACTION_TYPES.SET_STICKY_HEADER,
+        isStickyHeader,
+    }
+}
+
 const setVideoList = (videoList) => {
     return {
         type: ACTION_TYPES.SET_VIDEO_LIST,
@@ -16,5 +23,6 @@ const setVideoList = (videoList) => {
 
 export {
     setVersion,
-    setVideoList
+    setVideoList,
+    setStickyHeader,
 }

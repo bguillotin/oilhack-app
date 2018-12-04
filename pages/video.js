@@ -13,6 +13,12 @@ const styles = {
 }
 
 class Video extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoadind: true,
+    }
+  }
   async componentDidMount() {
     if (!this.props.videoList || this.props.videoList.length === 0 ) {
       const res = await fetch('/vimeo');
@@ -20,6 +26,7 @@ class Video extends React.PureComponent {
 
       // Set State with video list and proper Url. 
       this.props.setVideoList(mapVideoListUrl(json.data));
+      this.setState({ isLoadind : false});
     }
   }
 
@@ -27,12 +34,13 @@ class Video extends React.PureComponent {
       const {classes} = this.props;
 
       return (
+
         <MainLayout>
+          { this.state.isLoadind ? "Loading" : "Videos are loaded !!" }
           <p className={classes.p}>This is the Videos page</p>
-          <p>The number of Videos is :: { this.props.videoList ? this.props.videoList.length : 0 }</p>
-        
+          <p>The number of Videos is :: { this.props.videoList && this.props.videoList.length }</p>
           <ul>
-            { this.props.videoList.map((element) => <li key={element.uri}><Link href={element.url}><a target="_blank">{element.name}</a></Link></li>)}
+            { (this.props.videoList || []).map((element) => <li key={element.uri}><Link href={element.url}><a target="_blank">{element.name}</a></Link></li>)}
           </ul>
           <Link href='/'><a>Go home</a></Link>
         </MainLayout>

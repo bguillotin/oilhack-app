@@ -26,15 +26,17 @@ nextApp.prepare()
         res.send({version : version});
     });
 
-    expressApp.get('/vimeo', (req, res) => {    
-        clientV.request({
+    expressApp.get('/vimeo', (req, res) => {
+        const params = {
             path: '/me/appearances',
             query: {
                 page: 1,
                 per_page: 10,
                 fields: 'uri,name,description,duration,created_time,modified_time'
             }
-        }, function (error, body, status_code, headers) {
+        }
+        
+        clientV.request(params, function (error, body) {
             if (error) {
                 console.log('error');
                 console.log(error);
