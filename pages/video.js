@@ -38,7 +38,7 @@ class Video extends React.PureComponent {
         <MainLayout>
           { this.state.isLoadind ? "Loading" : "Videos are loaded !!" }
           <p className={classes.p}>This is the Videos page</p>
-          <p>The number of Videos is :: { this.props.videoList && this.props.videoList.length }</p>
+          <p>The number of Videos is :: { (this.props.videoList || []).length }</p>
           <ul>
             { (this.props.videoList || []).map((element) => <li key={element.uri}><Link href={element.url}><a target="_blank">{element.name}</a></Link></li>)}
           </ul>
