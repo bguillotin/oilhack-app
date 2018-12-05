@@ -1,6 +1,5 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import Sticky from "./Sticky";
 import injectSheet from "react-jss";
 // import back from './back.jpg';
 
@@ -26,7 +25,7 @@ class MainLayout extends React.PureComponent {
 
     return (
       <div id="main" className={classes.mainDiv}>
-        <Sticky><Header/></Sticky>
+        <Header/>
         <section className={classes.section}>{this.props.children}</section>
         <Footer/>
       </div>

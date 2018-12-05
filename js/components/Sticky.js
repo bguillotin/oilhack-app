@@ -20,11 +20,8 @@ class Sticky extends React.PureComponent {
     checkPosition = () => {
         const stickyElement = this.stickyElementRef.current;
         const { top } = stickyElement.getBoundingClientRect();
-        if (top < -100 ) {
-            this.props.setStickyHeader(true);
-        } else {
-            this.props.setStickyHeader(false);
-        }
+        
+        this.props.setStickyHeader(top < -0);
     }
 
     render() {

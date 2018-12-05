@@ -1,4 +1,5 @@
 import Video from './Video';
+import Sticky from "./Sticky";
 import Nav from './Nav';
 import { connect } from 'react-redux';
 import 'isomorphic-unfetch';
@@ -19,7 +20,7 @@ class Header extends React.Component {
     return (
       <header className={isStickyHeader ? classes.stickyHeader : classes.header}>
         <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/>
-        <Nav />
+        <Sticky><Nav /></Sticky>
       </header>
     );
   }

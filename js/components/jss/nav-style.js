@@ -14,18 +14,22 @@ export default {
     "& li": {
       marginRight: "12px",
       "& a": {
-        textDecoration: "none"
+        "&.activeLink": {
+          color: "red",
+          transition: "all 0.7s ease-out",
+        },
+        "&.inactiveLink" : {
+          color: "white",
+          transition: "all 0.7s ease-out",
+        },
+        textDecoration: "none",
       },
       "& a:visited": {},
       "& a:hover": {
-        color: "orange"
+        "&.activeLink, &.inactiveLink": {
+          color: "orange"
+        }
       }
     }
   },
-  activeLink: {
-    color: "red"
-  },
-  inactiveLink: {
-    color: "white"
-  }
 };
