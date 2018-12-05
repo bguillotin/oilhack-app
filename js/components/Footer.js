@@ -2,12 +2,7 @@ import Video from './Video';
 import { connect } from 'react-redux';
 import { setVersion } from '../action';
 import injectSheet from 'react-jss';
-
-const styles = {
-    footer: {
-        backgroundColor: "#57EEF5",
-    },
-}
+import styles from './jss/footer-style';
 
 class Footer extends React.PureComponent {
     async componentDidMount() {

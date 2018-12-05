@@ -2,7 +2,6 @@ import { withRouter } from "next/router";
 import Link from "next/link";
 import styles from "./jss/nav-style";
 import injectSheet from "react-jss";
-import { Seq } from "immutable";
 
 class Nav extends React.PureComponent {
   toUpperCase = string => <b>{string.toUpperCase()}</b>;

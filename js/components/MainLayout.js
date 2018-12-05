@@ -1,23 +1,7 @@
-import Header from "./Header";
-import Footer from "./Footer";
-import injectSheet from "react-jss";
-// import back from './back.jpg';
-
-const styles = {
-  mainDiv: {
-  },
-  header: {
-    display: "block",
-   
-  },
-  section: {
-    height: "1000px",
-    backgroundColor: "#57EEF5",
-  },
-  footer: {
-    
-  }
-};
+import Header from './Header';
+import Footer from './Footer';
+import injectSheet from 'react-jss';
+import styles from './jss/main-layout-style';
 
 class MainLayout extends React.PureComponent {
   render() {

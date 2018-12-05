@@ -9,6 +9,8 @@ const initialState = fromJS({
     version: undefined,
     videoList: [],
     isStickyHeader: false,
+    color : "red",
+    position: -50,
 });
 
 // REDUCERS.
@@ -29,6 +31,16 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isStickyHeader: action.isStickyHeader,
+            }
+        case ACTION_TYPES.SET_COLOR: 
+            return {
+                ...state,
+                color: action.color,
+            }
+        case ACTION_TYPES.SET_POSITION: 
+            return {
+                ...state,
+                position: action.position,
             }
         default: return state
     }

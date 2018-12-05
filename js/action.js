@@ -21,8 +21,24 @@ const setVideoList = (videoList) => {
     }
 }
 
+const setColor = (color) => {
+    return {
+        type: ACTION_TYPES.SET_COLOR,
+        color,
+    }
+}
+
+const setPosition = (position) => {
+    return {
+        type: ACTION_TYPES.SET_POSITION,
+        position,
+    }
+}
+
 export {
     setVersion,
     setVideoList,
     setStickyHeader,
+    setColor,
+    setPosition,
 }
