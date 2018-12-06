@@ -5,12 +5,7 @@ import { setVideoList } from '../js/action';
 import { connect } from 'react-redux';
 import { mapVideoListUrl } from '../js/utils/video-utils';
 import injectSheet from 'react-jss';
-
-const styles = {
-  p: {
-    color: "#1400B3",
-  }
-}
+import styles from './jss/video-style';
 
 class Video extends React.PureComponent {
   constructor(props) {
@@ -32,10 +27,11 @@ class Video extends React.PureComponent {
 
   render() {
       const {classes} = this.props;
-
+      const childClasses = {
+        classes,
+      }
       return (
-
-        <MainLayout>
+        <MainLayout {...childClasses}>
           { this.state.isLoadind ? "Loading" : "Videos are loaded !!" }
           <p className={classes.p}>This is the Videos page</p>
           <p>The number of Videos is :: { (this.props.videoList || []).length }</p>

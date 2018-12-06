@@ -25,7 +25,7 @@ class Header extends React.Component {
     return (
       <header className={navClass}>
         <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/>
-        <Sticky><Nav /></Sticky>
+        <Sticky><Nav/></Sticky>
       </header>
     );
   }

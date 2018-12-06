@@ -2,6 +2,7 @@ import { withRouter } from "next/router";
 import Link from "next/link";
 import styles from "./jss/nav-style";
 import injectSheet from "react-jss";
+import InstaLogo from "../../static/images/instagram.svg";
 
 class Nav extends React.PureComponent {
   toUpperCase = string => <b>{string.toUpperCase()}</b>;
@@ -46,6 +47,11 @@ class Nav extends React.PureComponent {
                 {this.toUpperCase("Contact me")}
               </a>
             </Link>
+          </li>
+          <li>
+            {/* <a href="https://www.instagram.com/oilhack/" target="_blank">
+              <InstaLogo />
+            </a> */}
           </li>
         </ul>
       </nav>

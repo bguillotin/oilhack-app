@@ -19,7 +19,7 @@ class Footer extends React.PureComponent {
         return (
             <footer className={classes.footer}>
                 Here I am the footer // Web Site made by ArtFactWeb // version:{this.props.version}
-                <Video src="http://wearecolorful.net/wp-content/uploads/2017/05/10.mp4"/>
+                <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/>
             </footer>);
     }
 }

@@ -39,14 +39,15 @@ class Sticky extends React.PureComponent {
     checkPosition = () => {
         const stickyElement = this.stickyElementRef.current;
         const { top } = stickyElement.getBoundingClientRect();
+        let isScrollUnderTop = (top < 0);
         
-        if (top < 0) {
-            this.props.setStickyHeader(true);
+        if (isScrollUnderTop) {
             this.changePosition();
         } else {
-            this.props.setStickyHeader(false);
             this.props.setPosition(-50);
         }
+        
+        this.props.setStickyHeader(isScrollUnderTop);
     }
 
     render() {

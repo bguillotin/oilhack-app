@@ -1,5 +1,7 @@
 const expressApp = require('express')();
 const server = require('http').Server(expressApp)
+const favicon = require('serve-favicon');
+const path = require('path');
 const next = require('next');
 const { parse } = require('url');
 const Vimeo = require('vimeo').Vimeo;
@@ -16,8 +18,7 @@ const clientV = new Vimeo(VIMEO_ID, VIMEO_SECRET, VIMEO_TOKEN);
 // App version from package.json.
 const { version } = require('./package.json');
 
-// Send a message to cliente
-const messages = [];
+expressApp.use(favicon(path.join(__dirname, "static", "images", "favicon.png")));
 
 nextApp.prepare()
 .then(() => {
