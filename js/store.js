@@ -9,6 +9,7 @@ const initialState = fromJS({
     version: undefined,
     videoList: [],
     isStickyHeader: false,
+    isScrolling: false,
     color : "red",
     position: -50,
 });
@@ -41,6 +42,11 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 position: action.position,
+            }
+        case ACTION_TYPES.SET_SCROLLING: 
+            return {
+                ...state,
+                isScrolling: action.isScrolling,
             }
         default: return state
     }

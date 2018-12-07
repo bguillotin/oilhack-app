@@ -14,6 +14,13 @@ const setStickyHeader = (isStickyHeader) => {
     }
 }
 
+const setScrolling = (isScrolling) => {
+    return {
+        type: ACTION_TYPES.SET_SCROLLING,
+        isScrolling,
+    }
+}
+
 const setVideoList = (videoList) => {
     return {
         type: ACTION_TYPES.SET_VIDEO_LIST,
@@ -41,4 +48,5 @@ export {
     setStickyHeader,
     setColor,
     setPosition,
+    setScrolling,
 }

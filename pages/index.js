@@ -2,7 +2,6 @@ import Vimeo from '@u-wave/react-vimeo';
 import Head from 'next/head';
 import MainLayout from '../js/components/MainLayout';
 import { connect } from 'react-redux';
-// import { setColor, setPosition } from '../js/action'
 import injectSheet from 'react-jss';
 import styles from './jss/home-style'
 import RandomImage from '../js/components/RandomImage';
@@ -11,6 +10,9 @@ import RandomImage from '../js/components/RandomImage';
 class Index extends React.PureComponent {
     constructor(props) {
         super(props);
+        this.state = {
+            refToScrollTo: null,
+        }
     }
 
     render() {
@@ -30,8 +32,8 @@ class Index extends React.PureComponent {
                     `}</style>
                 </Head>
                 <MainLayout>
-                    <RandomImage />
-                    <p>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</p>
+                    <RandomImage refToScrollTo={this.state.refToScrollTo} />
+                    <span ref={ (ref) => this.setState({refToScrollTo:ref })}>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</span>
                     <Vimeo video="302238593" autoplay muted={true} loop={true}/>
                 </MainLayout>
             </React.Fragment>

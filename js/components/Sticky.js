@@ -1,10 +1,11 @@
 import React, { createRef } from 'react';
-import { setStickyHeader, setPosition } from '../action';
+import { setStickyHeader, setPosition, setScrolling } from '../action';
 import { connect } from 'react-redux';
 
 class Sticky extends React.PureComponent {
     constructor(props) {
         super(props);
+        // Create an element reference.
         this.stickyElementRef = React.createRef();
         // Bind function.
         this.checkPosition = this.checkPosition.bind(this);
@@ -16,7 +17,8 @@ class Sticky extends React.PureComponent {
         this.state = {
             isScrollUnderTop: false,
             intervalId: 0,
-            incrementOrDecrement: 1
+            incrementOrDecrement: 1,
+            isScrolling: props.isScrolling,
         }
     }
 
@@ -56,15 +58,25 @@ class Sticky extends React.PureComponent {
     }
     
     checkPosition = () => {
-        const stickyElement = this.stickyElementRef.current;
-        const { top } = stickyElement.getBoundingClientRect();
-        
+        const { top } = this.stickyElementRef.current.getBoundingClientRect();
+        const { isScrolling } = this.props;
+        let timeoutValue = 0;
         let isScrollUnderTop = (top < 0);
         
         if (isScrollUnderTop && !this.state.isScrollUnderTop) {
+            if (isScrolling) {
+                timeoutValue = 350;
+                this.props.setScrolling(false);
+            } else {
+                this.props.setStickyHeader(isScrollUnderTop);
+            }
+            // Add timeout in case automatic scrolling.
+            setTimeout(() => {
+                this.changePositionDown();  
+                this.props.setStickyHeader(isScrollUnderTop);  
+            }, timeoutValue);
             this.setState({ isScrollUnderTop: true, incrementOrDecrement: 1 });
-            this.changePositionDown();
-            this.props.setStickyHeader(isScrollUnderTop);
+            
         } else if (!isScrollUnderTop && this.state.isScrollUnderTop) {
             this.setState({ isScrollUnderTop: false,  incrementOrDecrement: -1 });
             this.changePositionUp();
@@ -82,9 +94,10 @@ class Sticky extends React.PureComponent {
 
 const mapDispatchToState = (dispatch) => ({ 
     setStickyHeader: (isStickyHeader) => dispatch(setStickyHeader(isStickyHeader)), 
-    setPosition: (position) => dispatch(setPosition(position))
+    setPosition: (position) => dispatch(setPosition(position)),
+    setScrolling: (isScrolling) => dispatch(setScrolling(isScrolling))
 })
 
-const mapStateToProps = (state) => ({ position: state.position })
+const mapStateToProps = (state) => ({ position: state.position, isScrolling: state.isScrolling })
 
 export default connect(mapStateToProps, mapDispatchToState)(Sticky);

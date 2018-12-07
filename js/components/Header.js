@@ -1,4 +1,3 @@
-import Video from './Video';
 import Sticky from "./Sticky";
 import Nav from './Nav';
 import { connect } from 'react-redux';
@@ -11,12 +10,6 @@ class Header extends React.Component {
   constructor(props){
     super(props);
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("Here is NextProps :: ", nextProps);
-  //   console.log("Here is NextState :: ", nextState);
-
-  //   return true;
-  // }
 
   render() {
     const { classes, isStickyHeader } = this.props;
@@ -24,6 +17,7 @@ class Header extends React.Component {
 
     return (
       <header className={navClass}>
+        <span className={classes.title}>OILHACK</span>
         <Sticky><Nav/></Sticky>
       </header>
     );
@@ -31,6 +25,5 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = (state) => ({ isStickyHeader: state.isStickyHeader, position :state.position });
-
 
 export default connect(mapStateToProps)(injectSheet(styles)(Header));
