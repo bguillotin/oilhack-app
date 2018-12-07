@@ -5,6 +5,7 @@ export default {
     width: "100%",
     top: "50px",
     color: "white",
+    transition: "all 0.7s ease-in", //VERY NICE EFFECT !! 
   },
   topMenu: {
     display: "flex",

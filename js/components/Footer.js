@@ -1,6 +1,8 @@
 import Video from './Video';
 import { connect } from 'react-redux';
 import { setVersion } from '../action';
+import { INSTA_CST } from '../constants/insta-cst';
+import instaLogo from '../../static/images/instagram-logo.png';
 import injectSheet from 'react-jss';
 import styles from './jss/footer-style';
 
@@ -18,8 +20,9 @@ class Footer extends React.PureComponent {
 
         return (
             <footer className={classes.footer}>
-                Here I am the footer // Web Site made by ArtFactWeb // version:{this.props.version}
-                <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/>
+                <p>Here I am the footer // Web Site made by ArtFactWeb // version:{this.props.version}</p>
+                {/* <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/> */}
+                <a className={classes.instaLogo} href={INSTA_CST.LINK} target="_blank"><img src={instaLogo}/></a>
             </footer>);
     }
 }

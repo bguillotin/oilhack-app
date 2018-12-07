@@ -20,11 +20,10 @@ class Header extends React.Component {
 
   render() {
     const { classes, isStickyHeader } = this.props;
-    let navClass = classNames(isStickyHeader ? classes.stickyHeader : classes.header);
+    let navClass = classNames(isStickyHeader ? classes.stickyHeader : classes.header, classes.background);
 
     return (
       <header className={navClass}>
-        <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/>
         <Sticky><Nav/></Sticky>
       </header>
     );

@@ -27,9 +27,7 @@ class Video extends React.PureComponent {
 
   render() {
       const {classes} = this.props;
-      const childClasses = {
-        classes,
-      }
+      const childClasses = { classes };
       return (
         <MainLayout {...childClasses}>
           { this.state.isLoadind ? "Loading" : "Videos are loaded !!" }
