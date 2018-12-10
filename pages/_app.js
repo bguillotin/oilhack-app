@@ -1,4 +1,5 @@
 import App, { Container } from "next/app";
+import Head from 'next/head';
 import withReduxStore from "../js/lib/with-redux-store";
 import { Provider } from "react-redux";
 
@@ -16,6 +17,9 @@ class OilhackApp extends App {
 
     return (
         <Container>
+          <Head>
+            <title>Oilhack website</title>
+          </Head>
           <Provider store={reduxStore}>
               <Component {...pageProps} />
           </Provider>
