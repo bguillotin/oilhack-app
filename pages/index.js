@@ -1,6 +1,5 @@
 import Vimeo from '@u-wave/react-vimeo';
 import MainLayout from '../js/components/MainLayout';
-import injectSheet from 'react-jss';
 import RandomImage from '../js/components/RandomImage';
 
 // export default Index;
@@ -13,7 +12,6 @@ class Index extends React.PureComponent {
     }
 
     render() {
-        const { classes } = this.props;
         return (
             <MainLayout>
                 <RandomImage refToScrollTo={this.state.refToScrollTo} />

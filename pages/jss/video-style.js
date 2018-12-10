@@ -6,8 +6,5 @@ export default {
         backgroundImage: "url('../../static/images/loupe.jpg')",
         height: "2000px",
         color: "white",
-    },
-    carousel: {
-        
     }
 }

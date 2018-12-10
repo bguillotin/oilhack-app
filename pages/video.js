@@ -44,19 +44,19 @@ class Video extends React.PureComponent {
   }
 
   changeVideoIndex(videoIndex) {
-    
     this.setState({slideIndex :videoIndex})
   }
 
   render() {
       const {classes} = this.props;
       const childClasses = { classes };
+      
       return (
         <MainLayout {...childClasses}>
           { this.state.isLoading ? "Loading" : "Videos are loaded !!" }
           <p>Here is slide Index ::: {this.state.slideIndex}</p>
           <p className={classes.p}>This is the Videos page</p>
-          { (this.props.videoList || []).map((video, index) => (<div key={index}><Vimeo video={video.id}  muted={true} loop={true}/></div>) )}
+          { (this.props.videoList || []).map((video, index) => (<div key={index}><Vimeo video={video.id} muted={true} loop={true}/></div>) )}
           <Link href='/'><a>Go home</a></Link>
         </MainLayout>
       );
