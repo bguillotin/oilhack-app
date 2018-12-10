@@ -24,13 +24,6 @@ export default class JssDocument extends Document {
     return (
       <html>
         <Head>
-            <style jsx global>{`
-                body {
-                    background: #000;
-                    margin: 0;
-                    font-family: monospace;
-                }
-            `}</style>
           <style id='server-side-styles'>
             {this.props.registry.toString()}
           </style>

@@ -1,7 +1,6 @@
 import Vimeo from '@u-wave/react-vimeo';
 import MainLayout from '../js/components/MainLayout';
 import injectSheet from 'react-jss';
-import styles from './jss/home-style'
 import RandomImage from '../js/components/RandomImage';
 
 // export default Index;
@@ -35,4 +34,4 @@ class Index extends React.PureComponent {
 
 // const mapStateToProps = (state) => ({ color: state.color, position: state.position })
 // export default connect(mapStateToProps)(injectSheet(styles)(Index));
-export default injectSheet(styles)(Index);
+export default Index;
