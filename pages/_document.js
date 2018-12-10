@@ -1,28 +1,46 @@
-import { Head } from 'next/document';
+import React from 'react'
+import Document, { Head, Main, NextScript } from 'next/document'
+import {
+  SheetsRegistry,
+  JssProvider
+} from 'react-jss'
 
-class MyDocument extends React.PureComponent {
-    render() {
-        return (
-            <html>
-                <Head>
-                    <title>Oilhack website</title>
-                    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet" />
-                    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-                    <style jsx global>{`
-                        body { 
-                            background: #000;
-                            margin: 0;
-                            font-family: monospace;
-                        }
-                    `}</style>
-                </Head>
-                <body>
-                    <Main />
-                    <NextScript />
-                </body>
-            </html>
-        );
-    }
+export default class JssDocument extends Document {
+  static getInitialProps (ctx) {
+    const registry = new SheetsRegistry()
+    const page = ctx.renderPage(App => props => (
+      <JssProvider registry={registry}>
+        <App {...props} />
+      </JssProvider>
+    ))
+
+    return {
+      ...page,
+      registry
+    }     
+  }
+
+  render () {
+    return (
+      <html>
+        <Head>
+            <style jsx global>{`
+                body {
+                    background: #000;
+                    margin: 0;
+                    font-family: monospace;
+                }
+            `}</style>
+          <style id='server-side-styles'>
+            {this.props.registry.toString()}
+          </style>
+        </Head>
+
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </html>
+    )
+  }
 }
-
-export default MyDocument;

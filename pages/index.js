@@ -1,6 +1,5 @@
 import Vimeo from '@u-wave/react-vimeo';
 import MainLayout from '../js/components/MainLayout';
-import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './jss/home-style'
 import RandomImage from '../js/components/RandomImage';
@@ -17,11 +16,11 @@ class Index extends React.PureComponent {
     render() {
         const { classes } = this.props;
         return (
-                <MainLayout>
-                    <RandomImage refToScrollTo={this.state.refToScrollTo} />
-                    <span ref={ (ref) => this.setState({refToScrollTo:ref })}>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</span>
-                    <Vimeo video="302238593" autoplay muted={true} loop={true}/>
-                </MainLayout>
+            <MainLayout>
+                <RandomImage refToScrollTo={this.state.refToScrollTo} />
+                <span ref={ (ref) => this.setState({refToScrollTo:ref })}>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</span>
+                <Vimeo video="302238593" autoplay muted={true} loop={true}/>
+            </MainLayout>
         );
     }
 }

@@ -4,6 +4,4 @@ module.exports = {
     distDir: 'dist',
 } 
 
-
-
 module.exports = withImages();
