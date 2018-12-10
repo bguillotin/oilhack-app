@@ -1,5 +1,4 @@
 import Vimeo from '@u-wave/react-vimeo';
-import Head from 'next/head';
 import MainLayout from '../js/components/MainLayout';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
@@ -18,25 +17,11 @@ class Index extends React.PureComponent {
     render() {
         const { classes } = this.props;
         return (
-            <React.Fragment>
-                <Head>
-                    <title>Oilhack website</title>
-                    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet" />
-                    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-                    <style jsx global>{`
-                        body { 
-                            background: #000;
-                            margin: 0;
-                            font-family: monospace;
-                        }
-                    `}</style>
-                </Head>
                 <MainLayout>
                     <RandomImage refToScrollTo={this.state.refToScrollTo} />
                     <span ref={ (ref) => this.setState({refToScrollTo:ref })}>Welcome to Oilhack Website ! Running now on node Server with the lastest videos !!</span>
                     <Vimeo video="302238593" autoplay muted={true} loop={true}/>
                 </MainLayout>
-            </React.Fragment>
         );
     }
 }

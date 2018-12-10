@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import { mapVideoListUrl } from '../js/utils/video-utils';
 import injectSheet from 'react-jss';
 import styles from './jss/video-style';
-import Carousel from 'nuka-carousel';
-// import Loader from 'react-loader-spinner';
 
 class Video extends React.PureComponent {
   constructor(props) {
@@ -19,13 +17,18 @@ class Video extends React.PureComponent {
     this.state = {
       isLoading: true,
       slideIndex: 0,
-      videoList: [],
     }
   }
 
+    _setInitialState () {
+      let sliderSettings = config.sliderSettings;
+      sliderSettings.slideCount = this.props.videoData ? this.props.videoData.length : 0;
+
+      return {settings: sliderSettings};
+    }
+
   async componentDidMount() {
-    const videoList = this.loadData();
-    this.setState({ videoList : videoList});
+    await this.loadData();
     this.setState({ isLoading : false});
   }
 
@@ -37,21 +40,15 @@ class Video extends React.PureComponent {
       // Set State with video list and proper Url. 
       const videoList = mapVideoListUrl(json.data);
       this.props.setVideoList(videoList);
-
-      return videoList;
-    } else {
-      return this.props.videoList || [];
     }
   }
 
   changeVideoIndex(videoIndex) {
-    console.log('Here is a problem 0');
     
     this.setState({slideIndex :videoIndex})
   }
 
   render() {
-      console.log('Here is a problem 1');
       const {classes} = this.props;
       const childClasses = { classes };
       return (
@@ -59,8 +56,7 @@ class Video extends React.PureComponent {
           { this.state.isLoading ? "Loading" : "Videos are loaded !!" }
           <p>Here is slide Index ::: {this.state.slideIndex}</p>
           <p className={classes.p}>This is the Videos page</p>
-         { (this.props.videoList || []).map((video, index) => (<Vimeo video={video.id} key={index} muted={true} loop={true}/>) )}
-          {/* (<Loader type="Puff" color="#00BFFF" height="100"width="100"/>)  */}
+          { (this.props.videoList || []).map((video, index) => (<div key={index}><Vimeo video={video.id}  muted={true} loop={true}/></div>) )}
           <Link href='/'><a>Go home</a></Link>
         </MainLayout>
       );
