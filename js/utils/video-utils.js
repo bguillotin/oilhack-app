@@ -2,7 +2,7 @@ import { VIMEO_CST } from "../constants/vimeo-cst";
 import { Seq } from 'immutable';
 
 // Filter videos without word OF in Title and Map uri to create finale Vimeo url.
-export const mapVideoListUrl = videoList => {
+export const mapVideoListUrl = (videoList) => {
   const lazySeq = Seq(videoList);
   return lazySeq
     .filter((video) => {

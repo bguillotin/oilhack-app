@@ -59,13 +59,7 @@ class Video extends React.PureComponent {
           { this.state.isLoading ? "Loading" : "Videos are loaded !!" }
           <p>Here is slide Index ::: {this.state.slideIndex}</p>
           <p className={classes.p}>This is the Videos page</p>
-          { !this.state.isLoading ? (<Carousel className={classes.carousel} pauseOnHover={true}  
-            framePadding={"200px 500px"}
-            slideIndex={this.state.slideIndex}
-            afterSlide={(slideIndex) => this.changeVideoIndex(slideIndex)}
-            renderAnnounceSlideMessage={({ currentSlide, slideCount }) => `Slide ${currentSlide + 1} of ${slideCount}`}>
-            { (this.props.videoList || []).map((video, index) => (<Vimeo video={video.id} key={index} muted={true} loop={true}/>))}
-          </Carousel>) : undefined } 
+         { (this.props.videoList || []).map((video, index) => (<Vimeo video={video.id} key={index} muted={true} loop={true}/>) )}
           {/* (<Loader type="Puff" color="#00BFFF" height="100"width="100"/>)  */}
           <Link href='/'><a>Go home</a></Link>
         </MainLayout>
