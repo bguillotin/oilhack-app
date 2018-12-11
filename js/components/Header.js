@@ -14,11 +14,12 @@ class Header extends React.Component {
   render() {
     const { classes, isStickyHeader } = this.props;
     let navClass = classNames(isStickyHeader ? classes.stickyHeader : classes.header, classes.background);
+    const propsIsSticky = { isSticky : isStickyHeader };
 
     return (
       <header className={navClass}>
         <span className={classes.title}>OILHACK</span>
-        <Sticky><Nav/></Sticky>
+        <Sticky><Nav {...propsIsSticky} /></Sticky>
       </header>
     );
   }

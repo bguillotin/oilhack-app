@@ -19,17 +19,12 @@ export default class JssDocument extends Document {
     render() {
         const style = {
             margin: "0px",
-            // fontFamily: "'Zilla Slab', Helvetica, sans-serif",
-            // fontFamily: "'Black And White Picture', sans-serif"
-            fontFamily: "'Black And White Picture', sans-serif",
-            fontFamily: "'Dokdo', cursive",
+            fontFamily: "'Noto Serif TC', serif",
         }
     return (
       <html>
         <Head>
-            {/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Zilla+Slab:400,700" /> */}
-            {/* <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture" rel="stylesheet"></link> */}
-            <link href="https://fonts.googleapis.com/css?family=Black+And+White+Picture|Dokdo" rel="stylesheet"></link>
+            <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet"></link>
             <style id="server-side-styles">
                 {this.props.registry.toString()}
             </style>

@@ -5,9 +5,9 @@ import { Seq } from 'immutable';
 export const mapVideoListUrl = (videoList) => {
   const lazySeq = Seq(videoList);
   return lazySeq
-    .filter((video) => {
-      return !video.name.includes(VIMEO_CST.EXCLUDE_VIDEO_CONTAINING_TEXT);
-    })
+    // .filter((video) => {
+    //   return !video.name.includes(VIMEO_CST.EXCLUDE_VIDEO_CONTAINING_TEXT);
+    // })
     .map(element => {
       let videoId = element.uri.split(/\//)[2];
   

@@ -7,25 +7,28 @@ import { connect } from 'react-redux';
 import { mapVideoListUrl } from '../js/utils/video-utils';
 import injectSheet from 'react-jss';
 import styles from './jss/video-style';
+import classNames from 'classnames';
 
 class Video extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this.changeVideoIndex = this.changeVideoIndex.bind(this);
     this.loadData = this.loadData.bind(this);
+    this.getStyledButton = this.getStyledButton.bind(this);
+    this.changeButtonShowStatus = this.changeButtonShowStatus.bind(this);
+    this.goPrevious = this.goPrevious.bind(this);
+    this.goNext = this.goNext.bind(this);
 
     this.state = {
       isLoading: true,
       slideIndex: 0,
+      sliderButtonStatus : {
+        nextShow: true,
+        previousShow: false,
+      }
     }
   }
-
-    _setInitialState () {
-      let sliderSettings = config.sliderSettings;
-      sliderSettings.slideCount = this.props.videoData ? this.props.videoData.length : 0;
-
-      return {settings: sliderSettings};
-    }
 
   async componentDidMount() {
     await this.loadData();
@@ -35,35 +38,70 @@ class Video extends React.PureComponent {
   async loadData() {
     if (!this.props.videoList || this.props.videoList.length === 0 ) {
       const res = await fetch('/vimeo');
-      const json = await res.json();
+      if (res.status !== 200) {
+        this.props.setVideoList([], 0);
+      } else {
+        const json = await res.json();
 
-      // Set State with video list and proper Url. 
-      const videoList = mapVideoListUrl(json.data);
-      this.props.setVideoList(videoList);
+        // Set State with video list and proper Url. 
+        const videoList = mapVideoListUrl(json.data);
+        this.props.setVideoList(videoList, videoList.size);
+      }
+
     }
   }
 
-  changeVideoIndex(videoIndex) {
-    this.setState({slideIndex :videoIndex})
+  changeVideoIndex(videoIndex, callback) {
+    this.setState({slideIndex :videoIndex}, callback)
+  }
+
+  changeButtonShowStatus(previousIsShown, nextIsShown) {
+    this.setState({sliderButtonStatus: {
+      previousShow: previousIsShown,
+      nextShow: nextIsShown,
+    }});
+  }
+
+  getStyledButton(isShown) {
+    const { classes } = this.props;
+    return isShown ? classes.showButton : classes.hideButton
+  }
+
+  goPrevious() {
+    if (this.state.slideIndex > 0) {
+      this.changeVideoIndex(this.state.slideIndex -1, () => {
+        (this.state.slideIndex === 0) ? this.changeButtonShowStatus(false, true): this.changeButtonShowStatus(true, true);
+      });
+    }
+  }
+
+  goNext() {
+    if (this.state.slideIndex < this.props.nbVideo -1) {
+      this.changeVideoIndex(this.state.slideIndex +1, () => {
+        (this.state.slideIndex === this.props.nbVideo -1) ? this.changeButtonShowStatus(true, false): this.changeButtonShowStatus(true, true);
+      });
+    }
   }
 
   render() {
-      const {classes} = this.props;
-      const childClasses = { classes };
+      const { classes } = this.props;
       
       return (
-        <MainLayout {...childClasses}>
+        <MainLayout {...this.props}>
           { this.state.isLoading ? "Loading" : "Videos are loaded !!" }
-          <p>Here is slide Index ::: {this.state.slideIndex}</p>
           <p className={classes.p}>This is the Videos page</p>
-          { (this.props.videoList || []).map((video, index) => (<div key={index}><Vimeo video={video.id} muted={true} loop={true}/></div>) )}
+          <ul>
+            <button className={ this.getStyledButton(this.state.sliderButtonStatus.previousShow) } onClick={this.goPrevious}>Previous</button>
+            { (this.props.videoList || []).map((video, index) => (<li className={this.state.slideIndex === index ? classes.show : classes.hidden} key={index}><Vimeo video={video.id} muted={true} loop={true}/></li>) )}
+            <button className={ this.getStyledButton(this.state.sliderButtonStatus.nextShow) } onClick={this.goNext}>Next</button>
+          </ul>
           <Link href='/'><a>Go home</a></Link>
         </MainLayout>
       );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({ setVideoList: (videoList) => dispatch(setVideoList(videoList)), })
-const mapStateToProps = (state) => ({ videoList: state.videoList, })
+const mapDispatchToProps = (dispatch) => ({ setVideoList: (videoList, length) => {dispatch(setVideoList(videoList, length))}, })
+const mapStateToProps = (state) => ({ videoList: state.videoList, nbVideo: state.nbVideo })
 
 export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(Video));

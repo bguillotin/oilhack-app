@@ -12,6 +12,7 @@ const initialState = fromJS({
     isScrolling: false,
     color : "red",
     position: -50,
+    nbVideo: 0,
 });
 
 // REDUCERS.
@@ -26,6 +27,7 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 videoList: action.videoList,
+                nbVideo: action.nbVideo,
             }
         
         case ACTION_TYPES.SET_STICKY_HEADER:

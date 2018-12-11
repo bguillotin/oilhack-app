@@ -29,7 +29,7 @@ nextApp.prepare()
 
     expressApp.get('/vimeo', (req, res) => {
         const params = {
-            path: '/me/appearances',
+            path: '/me/videos',
             query: {
                 page: 1,
                 per_page: 10,
@@ -41,6 +41,8 @@ nextApp.prepare()
             if (error) {
                 console.log('error');
                 console.log(error);
+
+                res.status(500).send('Something broke!');
             }
             
             res.setHeader('content-type', 'application/json');

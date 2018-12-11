@@ -21,10 +21,11 @@ const setScrolling = (isScrolling) => {
     }
 }
 
-const setVideoList = (videoList) => {
+const setVideoList = (videoList, nbVideo) => {
     return {
         type: ACTION_TYPES.SET_VIDEO_LIST,
         videoList,
+        nbVideo,
     }
 }
 
