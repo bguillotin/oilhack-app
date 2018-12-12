@@ -43,6 +43,7 @@ nextApp.prepare()
                 console.log(error);
 
                 res.status(500).send('Something broke!');
+                return;
             }
             
             res.setHeader('content-type', 'application/json');

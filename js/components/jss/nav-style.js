@@ -21,6 +21,7 @@ export default {
     "& li": {
       marginRight: "12px",
       "& a": {
+        textDecoration: "none",
         "&.activeLink": {
           color: "red",
           transition: "all 0.7s ease-out",
@@ -29,7 +30,6 @@ export default {
           color: "black",
           transition: "all 0.7s ease-out",
         },
-        textDecoration: "none",
       },
       "& a:visited": {},
       "& a:hover": {
