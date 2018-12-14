@@ -11,7 +11,7 @@ class VideoSlider extends React.PureComponent {
     super(props);
 
     this.changeVideoIndex = this.changeVideoIndex.bind(this);
-    this.getStyledButton = this.getStyledButton.bind(this);
+    this.getStyledShow = this.getStyledShow.bind(this);
     this.changeButtonShowStatus = this.changeButtonShowStatus.bind(this);
     this.goPrevious = this.goPrevious.bind(this);
     this.goNext = this.goNext.bind(this);
@@ -19,8 +19,8 @@ class VideoSlider extends React.PureComponent {
     this.state = {
       slideIndex: 0,
       sliderButtonStatus: {
-        nextShow: true,
-        previousShow: false
+        nextIsShown: true,
+        previousIsShow: false
       }
     };
   }
@@ -32,20 +32,22 @@ class VideoSlider extends React.PureComponent {
   changeButtonShowStatus(previousIsShown, nextIsShown) {
     this.setState({
       sliderButtonStatus: {
-        previousShow: previousIsShown,
-        nextShow: nextIsShown
+        previousIsShow: previousIsShown,
+        nextIsShown: nextIsShown
       }
     });
   }
 
-  getStyledButton(isShown) {
-    return isShown ? "" : "hide";
+  getStyledShow(isShown) {
+    return isShown ? "show" : "hidden";
   }
 
   goPrevious() {
-    if (this.state.slideIndex > 0) {
-      this.changeVideoIndex(this.state.slideIndex - 1, () => {
-        this.state.slideIndex === 0
+    const { slideIndex } = this.state;
+
+    if (slideIndex > 0) {
+      this.changeVideoIndex(slideIndex - 1, () => {
+        slideIndex === 0
           ? this.changeButtonShowStatus(false, true)
           : this.changeButtonShowStatus(true, true);
       });
@@ -53,12 +55,13 @@ class VideoSlider extends React.PureComponent {
   }
 
   goNext() {
+    const { slideIndex } = this.state;
     // Mute previous video in case it is running.
-    this.props.videoList.get(this.state.slideIndex).muted = true;
+    this.props.videoList.get(slideIndex).muted = true;
 
-    if (this.state.slideIndex < this.props.nbVideo - 1) {
-      this.changeVideoIndex(this.state.slideIndex + 1, () => {
-        this.state.slideIndex === this.props.nbVideo - 1
+    if (slideIndex < this.props.nbVideo - 1) {
+      this.changeVideoIndex(slideIndex + 1, () => {
+        slideIndex === this.props.nbVideo - 1
           ? this.changeButtonShowStatus(true, false)
           : this.changeButtonShowStatus(true, true);
       });
@@ -71,18 +74,18 @@ class VideoSlider extends React.PureComponent {
     return (
       <div id="video-slider" className={classes.videoSlider}>
         <ul>
-          <a onClick={this.goPrevious} className={this.getStyledButton(this.state.sliderButtonStatus.previousShow)}>
+          <a onClick={this.goPrevious} className={this.getStyledShow(this.state.sliderButtonStatus.previousIsShow)}>
             <img src={arrowLeft} />
           </a>
           {(this.props.videoList || []).map((video, index) => (
             <li
-              className={this.state.slideIndex === index ? "show" : "hidden"}
+              className={this.getStyledShow(this.state.slideIndex === index)}
               key={index}
             >
               <Vimeo video={video.id} height="540px" muted={video.muted} loop={true} />
             </li>
           ))}
-          <a onClick={this.goNext} className={this.getStyledButton(this.state.sliderButtonStatus.nextShow)}>
+          <a onClick={this.goNext} className={this.getStyledShow(this.state.sliderButtonStatus.nextIsShown)}>
             <img src={arrowRight} />
           </a>
         </ul>

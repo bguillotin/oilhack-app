@@ -24,6 +24,7 @@
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.6",
     "redux-thunk": "^2.3.0",
+    "reenhance-components": "^0.2.5",
     "serve-favicon": "^2.5.0",
     "url": "^0.11.0",
     "vimeo": "^2.1.1"

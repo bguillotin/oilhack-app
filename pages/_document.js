@@ -5,9 +5,9 @@ export default class JssDocument extends Document {
     static getInitialProps(ctx) {
         const registry = new SheetsRegistry();
         const page = ctx.renderPage(App => props => (
-        <JssProvider registry={registry}>
-            <App {...props} />
-        </JssProvider>
+            <JssProvider registry={registry}>
+                <App {...props} />
+            </JssProvider>
         ));
 
         return {
@@ -26,7 +26,7 @@ export default class JssDocument extends Document {
         <Head>
             <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet"></link>
             <style id="server-side-styles">
-                {this.props.registry.toString()}
+                { this.props.registry.toString() }
             </style>
         </Head>
         <body style={style}>

@@ -1,23 +1,33 @@
 import Header from './Header';
-import Head from 'next/head';
-
 import Footer from './Footer';
 import injectSheet from 'react-jss';
 import styles from './jss/main-layout-style';
-import classNames from 'classnames';
+import { withRouter } from 'next/router';
+
+const JSS = {
+  SECTION: 'section',
+}
+
 
 class MainLayout extends React.PureComponent {
   render() {
-    const {classes} = this.props;
+    let classSection = JSS.SECTION;
+    const { classes, router } = this.props;
+    let { pathname } = router;
+    let jssAttribut = pathname.slice(1).charAt(0).toUpperCase().concat(pathname.slice(2));
+
+    if (classes[JSS.SECTION.concat(jssAttribut)]) {
+      classSection = JSS.SECTION.concat(jssAttribut)
+    }
 
     return (            
       <div id="main" className={classes.mainDiv}>
         <Header/>
-        <section className={classes.section}>{this.props.children}</section>
+        <section className={classes[classSection]}>{this.props.children}</section>
         <Footer/>
       </div>
     );
   }
 }
 
-export default injectSheet(styles)(MainLayout);
+export default injectSheet(styles)(withRouter(MainLayout));

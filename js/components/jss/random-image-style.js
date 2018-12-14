@@ -2,6 +2,7 @@
 export default {
     img: {
         width: "100%",
+        transition: "opacity 1s ease-in-out",
     },
     scrollTo: {
         display: "flex",
@@ -11,5 +12,8 @@ export default {
     },
     pointer: {
         cursor: "pointer"
+    },
+    global: {
+        
     }
 }

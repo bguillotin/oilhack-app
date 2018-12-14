@@ -21,7 +21,7 @@ export default {
             },
         },
         "& a": {
-            "&.hide": {
+            "&.hidden": {
                 visibility: "hidden",
             },
         },
