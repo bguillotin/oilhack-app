@@ -9,6 +9,7 @@ import backgroundImage3 from "../../static/images/background3.png";
 import ImageToScroll from "./ImageToScroll";
 
 const nbImages = 4;
+let timeOutId;
 
 class RandomImage extends React.PureComponent {
   constructor(props) {
@@ -21,11 +22,15 @@ class RandomImage extends React.PureComponent {
       imgLoaded: false
     };
 
-    setTimeout(() => {
+    timeOutId = setTimeout(() => {
         this.setState({imgLoaded:true})
     }, 1500);
 
     this.scrollTo = this.scrollTo.bind(this);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(timeOutId);
   }
 
   scrollTo() {

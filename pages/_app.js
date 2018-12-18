@@ -5,10 +5,10 @@ import { Provider } from "react-redux";
 
 class OilhackApp extends App {
   componentDidMount () {
-    const style = document.getElementById('server-side-styles')
+    const style = document.getElementById('server-side-styles');
 
     if (style) {
-      style.parentNode.removeChild(style)
+      style.parentNode.removeChild(style);
     }
   }
 
