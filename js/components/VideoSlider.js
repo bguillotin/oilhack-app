@@ -46,8 +46,8 @@ class VideoSlider extends React.PureComponent {
     const { slideIndex } = this.state;
 
     if (slideIndex > 0) {
-      this.changeVideoIndex(slideIndex - 1, () => {
-        slideIndex === 0
+      this.changeVideoIndex(slideIndex - 1, () => {        
+        this.state.slideIndex === 0
           ? this.changeButtonShowStatus(false, true)
           : this.changeButtonShowStatus(true, true);
       });
@@ -59,9 +59,9 @@ class VideoSlider extends React.PureComponent {
     // Mute previous video in case it is running.
     this.props.videoList.get(slideIndex).muted = true;
 
-    if (slideIndex < this.props.nbVideo - 1) {
+    if (slideIndex + 1 <= this.props.nbVideo - 1) {
       this.changeVideoIndex(slideIndex + 1, () => {
-        slideIndex === this.props.nbVideo - 1
+        this.state.slideIndex === this.props.nbVideo - 1
           ? this.changeButtonShowStatus(true, false)
           : this.changeButtonShowStatus(true, true);
       });
