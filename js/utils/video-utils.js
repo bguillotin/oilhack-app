@@ -1,11 +1,9 @@
 import { VIMEO_CST } from "../constants/vimeo-cst";
 import { Seq } from 'immutable';
 import 'isomorphic-unfetch';
-import { setVideoList } from '../../js/action';
-import  store from '../../js/store';
 
 // Filter videos without word OF in Title and Map uri to create finale Vimeo url.
-export const mapVideoListUrl = (videoList) => {
+const mapVideoListUrl = (videoList) => {
   const lazySeq = Seq(videoList);
   return lazySeq
     .map(element => {

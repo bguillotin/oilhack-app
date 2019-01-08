@@ -25,7 +25,6 @@ class Video extends React.PureComponent {
     
       return (
         <MainLayout>
-          { this.state.isLoading ? "Loading" : "Videos are loaded !!" }
           { this.state.isLoading ? undefined : <VideoSlider/>}
           <Link href='/'><a>Go home</a></Link>
         </MainLayout>

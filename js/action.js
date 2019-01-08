@@ -29,6 +29,23 @@ const setVideoList = (videoList, nbVideo) => {
     }
 }
 
+const setBoardList = (boardList, nbBoard) => {
+    return {
+        type: ACTION_TYPES.SET_BOARD_LIST,
+        boardList,
+        nbBoard,
+    }
+}
+
+const setImageListByBoardId = (imageList, nbImage, boardId) => {
+    return {
+        type: ACTION_TYPES.SET_IMAGE_LIST_BY_BOARD_ID,
+        imageList,
+        nbImage,
+        boardId,
+    }
+}
+
 const setColor = (color) => {
     return {
         type: ACTION_TYPES.SET_COLOR,
@@ -50,4 +67,6 @@ export {
     setColor,
     setPosition,
     setScrolling,
+    setBoardList,
+    setImageListByBoardId,
 }
