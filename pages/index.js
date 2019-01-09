@@ -1,4 +1,3 @@
-import Vimeo from '@u-wave/react-vimeo';
 import MainLayout from '../js/components/MainLayout';
 import RandomImage from '../js/components/RandomImage';
 

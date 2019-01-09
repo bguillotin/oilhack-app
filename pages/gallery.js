@@ -1,8 +1,8 @@
 import Link from "next/link";
 import MainLayout from "../js/components/MainLayout";
 import { connect } from "react-redux";
-import { setBoardList, setImageListByBoardId } from "../js/action";
-import { loadBoards, loadImageListByBoardId } from "../js/utils/image-utils";
+import { setBoardList } from "../js/action";
+import { loadBoards } from "../js/utils/image-utils";
 import 'isomorphic-unfetch';
 import injectSheet from "react-jss";
 
@@ -33,10 +33,7 @@ class Gallery extends React.PureComponent {
       <MainLayout>
         {this.state.isLoading ? "Data is Loading" : "Data loaded"}
         <p className={classes.p}>This is the Gallery page</p>
-        {/* { this.props.boardList && <div>
-          { this.props.boardList.data.map(board => (<p>{board.name}</p>) ) }
-        </div> } */}
-        { (this.props.boardList && this.props.boardList.length > 0) && this.props.boardList.map((x,index) => (<p key={index}>{x.name} #<a href={x.url} target="_blank">{x.url}</a></p>)) }
+        { (this.props.boardList && this.props.boardList.length > 0) && this.props.boardList.map((x,index) => (<p key={index}>{x.name} #<a href={"/gallery/detail?id=" + x.id}><img src={x.image.small.url}/></a></p>)) }
         <Link href="/">
           <a>Go home</a>
         </Link>
@@ -45,15 +42,7 @@ class Gallery extends React.PureComponent {
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   setBoardList: (boardList, nbBoard) => {
-//     dispatch(setBoardList(boardList, nbBoard));
-//   }
-// });
-const mapDispatchToProps = dispatch => ({
-  setImageListByBoardId: (imageList, nbImage, boardId) => {
-    dispatch(setImageListByBoardId(imageList, nbImage, boardId));
-  },
+const mapDispatchToProps = (dispatch) => ({
   setBoardList: (boardList, nbBoard) => {
     dispatch(setBoardList(boardList, nbBoard))
   }
