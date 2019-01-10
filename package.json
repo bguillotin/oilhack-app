@@ -23,6 +23,7 @@
     "react-loader-spinner": "^2.3.0",
     "react-redux": "^5.1.1",
     "react-slick": "^0.23.2",
+    "react-viewer": "^2.8.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.6",
     "redux-thunk": "^2.3.0",

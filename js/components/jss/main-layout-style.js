@@ -25,7 +25,7 @@ export default {
     },
     sectionGallery: {
         padding: "50px 0 0 0",
-        height: "1000px",
+        // height: "1000px",
         backgroundColor: "#770087",
     },
     sectionContact: {

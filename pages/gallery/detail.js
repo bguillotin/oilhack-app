@@ -1,5 +1,6 @@
 import MainLayout from "../../js/components/MainLayout";
 import Link from "next/link";
+import Viewer from "react-viewer";
 import { withRouter } from "next/router";
 import { connect } from "react-redux";
 import { setImageListByBoardId } from "../../js/action";
@@ -20,25 +21,37 @@ const styles = {
 class Detail extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this.state = {
       boardId: 0,
       isLoading: false,
       boardIndex: 0,
-      boardName: ""
+      boardName: "",
+      imageArray: [],
+      visible: false
     };
   }
 
   async componentDidMount() {
     // const { router } = this.props;
-    const { id:boardId, index:boardIndex, name:boardName } = this.props.router.query;
+    const {
+      id: boardId,
+      index: boardIndex,
+      name: boardName
+    } = this.props.router.query;
     this.setState({
       boardId,
       boardIndex,
-      boardName,
+      boardName
     });
     this.setState({ isLoading: true });
     await loadImageListByBoardId(this.props, boardId);
     this.setState({ isLoading: false });
+    // const imageArray = this.props.imageList.reduce((acc, x) => {
+    //   acc.push({ src: x.image.medium.url });
+    //   return acc;
+    // }, []);
+    this.setState({ imageArray: imageArray });
   }
 
   render() {
@@ -57,6 +70,22 @@ class Detail extends React.PureComponent {
               </li>
             ))}
         </ul>
+        {/* <div>
+          <button
+            onClick={() => {
+              this.setState({ visible: !this.state.visible });
+            }}
+          >
+            show
+          </button>
+          <Viewer
+            visible={this.state.visible}
+            onClose={() => {
+              this.setState({ visible: false });
+            }}
+            images={this.state.imageArray}
+          />
+        </div> */}
       </MainLayout>
     );
   }

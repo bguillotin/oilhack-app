@@ -1,9 +1,9 @@
 import "isomorphic-unfetch";
-import { Seq } from 'immutable';
+import { Seq } from "immutable";
 
 // const mapBoardList = (boardList) => {
 //     const lazySeq = Seq(boardList);
-//     return lazySeq.map(element => {  
+//     return lazySeq.map(element => {
 //       const newProperty = {
 //         test: 'VIMEO_CST.DOMAIN.concat(videoId),'
 //       };
@@ -17,10 +17,10 @@ import { Seq } from 'immutable';
 //   return lazySeq;
 // }
 
-export const loadBoards = async (props) => {
+export const loadBoards = async props => {
   if (!props.boardList || props.boardList.length === 0) {
     const res = await fetch("/pinterest/boards");
-    
+
     if (res.status !== 200) {
       props.setBoardList([], 0);
     } else {
@@ -31,17 +31,14 @@ export const loadBoards = async (props) => {
 };
 
 export const loadImageListByBoardId = async (props, boardId) => {
-    if (!props.imageList || props.imageList.length == 0) {
-        const res = await fetch("/pinterest/board/".concat(String(boardId)));
+  const res = await fetch("/pinterest/board/".concat(String(boardId)));
 
-        if (res.status !== 200) {
-          console.log('An error occured ::', res);
-          props.setImageListByBoardId([], 0, boardId);
-        } else {
-          const data = await res.json();
-          // const imageList = mapImageList(json.data);
-          props.setImageListByBoardId(data, data.length, boardId);
-        }
-    }
-
-}
+  if (res.status !== 200) {
+    console.log("An error occured ::", res);
+    props.setImageListByBoardId([], 0, boardId);
+  } else {
+    const data = await res.json();
+    // const imageList = mapImageList(json.data);
+    props.setImageListByBoardId(data, data.length, boardId);
+  }
+};

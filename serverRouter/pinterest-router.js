@@ -105,7 +105,7 @@ pinterestRouter.get("/board/:boardId", function(req, res) {
   //   }
   // };
   const boardId = req.params.boardId;
-  const fileNamePath = path.join("serverJSON", boardId.concat(".json"));
+  const fileNamePath = path.join("serverJSON", "boards", boardId.concat(".json"));
 
   jsonfile.readFile(fileNamePath, (err, obj) => {
     if (!err) {
