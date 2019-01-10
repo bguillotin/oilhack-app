@@ -37,7 +37,7 @@ pinterestRouter.get("/update", function(req, res) {
     if (!err || JSON.parse(obj) === "") {
       const options = {
         qs: {
-          fields: "id,image[small],name"
+          fields: "id,image[medium],name"
         }
       };
       // Retrieve DATA from Pinterest.
@@ -114,7 +114,7 @@ pinterestRouter.get("/board/:boardId", function(req, res) {
       res.send(data);
     } else {
       const boardRoute = "boards/".concat(req.params.boardId + "/pins");
-      const PIN_FIELDS = "id,image[small]";
+      const PIN_FIELDS = "id,image[medium]";
       const options = {
         qs: {
           fields: PIN_FIELDS,

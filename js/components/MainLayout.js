@@ -14,8 +14,7 @@ class MainLayout extends React.PureComponent {
     let classSection = JSS.SECTION;
     const { classes, router } = this.props;
     let { pathname } = router;
-    let jssAttribut = pathname.slice(1).charAt(0).toUpperCase().concat(pathname.slice(2));
-
+    let jssAttribut = pathname.slice(1).charAt(0).toUpperCase().concat(pathname.slice(2)).split("/")[0];
     if (classes[JSS.SECTION.concat(jssAttribut)]) {
       classSection = JSS.SECTION.concat(jssAttribut)
     }

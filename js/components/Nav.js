@@ -24,36 +24,31 @@ class Nav extends React.PureComponent {
             </li>
             <li>
               <Link href="/video">
-                <a className={ router.pathname === "/video" ? "activeLink" : "inactiveLink" } >
+                <a className={ router.pathname.includes("video") ? "activeLink" : "inactiveLink" } >
                   {this.toUpperCase("Video")}
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/gallery">
-                <a className={ router.pathname === "/gallery" ? "activeLink" : "inactiveLink" } >
+                <a className={ router.pathname.includes("gallery") ? "activeLink" : "inactiveLink" } >
                   {this.toUpperCase("Gallery")}
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/about">
-                <a className={ router.pathname === "/about" ? "activeLink" : "inactiveLink" } >
+                <a className={ router.pathname.includes("about") ? "activeLink" : "inactiveLink" } >
                   {this.toUpperCase("About")}
                 </a>
               </Link>
             </li>
             <li>
               <Link href="/contact">
-                <a className={ router.pathname === "/contact" ? "activeLink" : "inactiveLink" } >
+                <a className={ router.pathname.includes("contact") ? "activeLink" : "inactiveLink" } >
                   {this.toUpperCase("Contact")}
                 </a>
               </Link>
-            </li>
-            <li>
-              {/* <a href="https://www.instagram.com/oilhack/" target="_blank">
-                <InstaLogo />
-              </a> */}
             </li>
           </ul>
         </nav>

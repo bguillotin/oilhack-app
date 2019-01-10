@@ -3,12 +3,20 @@ import MainLayout from "../js/components/MainLayout";
 import { connect } from "react-redux";
 import { setBoardList } from "../js/action";
 import { loadBoards } from "../js/utils/image-utils";
-import 'isomorphic-unfetch';
+import "isomorphic-unfetch";
 import injectSheet from "react-jss";
 
 const styles = {
   p: {
     color: "yellow"
+  },
+  ul: {
+    display: "flex",
+    flexWrap: "wrap",
+    listStyle: "none",
+  },
+  li: {
+    padding: "0 12px 12px 0"
   }
 };
 
@@ -16,8 +24,8 @@ class Gallery extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
-    }
+      isLoading: false
+    };
   }
 
   async componentDidMount() {
@@ -31,9 +39,24 @@ class Gallery extends React.PureComponent {
 
     return (
       <MainLayout>
-        {this.state.isLoading ? "Data is Loading" : "Data loaded"}
+        {/* {this.state.isLoading ? "Data is Loading" : "Data loaded"} */}
         <p className={classes.p}>This is the Gallery page</p>
-        { (this.props.boardList && this.props.boardList.length > 0) && this.props.boardList.map((x,index) => (<p key={index}>{x.name} #<a href={"/gallery/detail?id=" + x.id}><img src={x.image.small.url}/></a></p>)) }
+        <ul className={classes.ul}>
+          {" "}
+          {this.props.boardList &&
+            this.props.boardList.length > 0 &&
+            this.props.boardList.map((x, index) => (
+              <li className={classes.li} key={index}>
+                <a href={"/gallery/detail?id=" + x.id + "&index=" + index + "&name=" + x.name }>
+                  <div>
+                    <img src={x.image.medium.url} />
+                  </div>
+                  <div>{x.name}</div>
+                </a>
+              </li>
+            ))}
+        </ul>
+
         <Link href="/">
           <a>Go home</a>
         </Link>
@@ -42,9 +65,9 @@ class Gallery extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   setBoardList: (boardList, nbBoard) => {
-    dispatch(setBoardList(boardList, nbBoard))
+    dispatch(setBoardList(boardList, nbBoard));
   }
 });
 

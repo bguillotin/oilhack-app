@@ -17,7 +17,6 @@ export default {
         padding: "50px 0 0 0",
         height: "1000px",
         backgroundColor: "#770087",
-        //backgroundImage: "url('../../../static/images/loupe.png')",
     },
     sectionAbout: {
         padding: "50px 0 0 0",
@@ -33,5 +32,5 @@ export default {
         height: "1000px",
         padding: "50px 0 0 0",
         backgroundColor: "#770087",
-    }
+    },
 }

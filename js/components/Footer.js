@@ -21,7 +21,7 @@ class Footer extends React.PureComponent {
         return (
             <footer className={classes.footer}>
                 <p>Here I am the footer // Web Site made by ArtFactWeb // version:{this.props.version}</p>
-                {/* <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/> */}
+                <Video src="http://wearecolorful.net/wp-content/uploads/2017/06/1.mp4"/>
                 <a className={classes.instaLogo} href={INSTA_CST.LINK} target="_blank"><img src={instaLogo}/></a>
             </footer>);
     }
