@@ -6,7 +6,7 @@ import backgroundImage1 from "../../static/images/background1.png";
 import backgroundImage2 from "../../static/images/background2.png";
 import backgroundImage3 from "../../static/images/background3.png";
 
-import ImageToScroll from "./ImageToScroll";
+// import ImageToScroll from "./ImageToScroll";
 
 const nbImages = 4;
 let timeOutId;
@@ -17,7 +17,6 @@ class RandomImage extends React.PureComponent {
 
     this.state = {
       imgRandomId: this.randomInt(nbImages),
-      colorRandom: ["#FFF2FC", "#ED30CA", "#30ED64"],
       classes: props.classes,
       imgLoaded: false
     };
@@ -52,9 +51,8 @@ class RandomImage extends React.PureComponent {
       <React.Fragment>
         {this.state.imgRandomId === 0 ? (
           <img
-            style={!imgLoaded ? { visibility: "hidden" } : {}}
             onLoad={() => this.setState({ imgLoaded: true })}
-            className={classes.img}
+            className={ imgLoaded ? classes.img : classes.imgHide }
             src={backgroundImage0}
           />
         ) : (
@@ -62,9 +60,8 @@ class RandomImage extends React.PureComponent {
         )}
         {this.state.imgRandomId === 1 ? (
           <img
-            style={!imgLoaded ? { visibility: "hidden" } : {}}
             onLoad={() => this.setState({ imgLoaded: true })}
-            className={classes.img}
+            className={ imgLoaded ? classes.img : classes.imgHide }
             src={backgroundImage1}
           />
         ) : (
@@ -72,9 +69,8 @@ class RandomImage extends React.PureComponent {
         )}
         {this.state.imgRandomId === 2 ? (
           <img
-            style={!imgLoaded ? { visibility: "hidden" } : {}}
             onLoad={() => this.setState({ imgLoaded: true })}
-            className={classes.img}
+            className={ imgLoaded ? classes.img : classes.imgHide }
             src={backgroundImage2}
           />
         ) : (
@@ -82,18 +78,13 @@ class RandomImage extends React.PureComponent {
         )}
         {this.state.imgRandomId === 3 ? (
           <img
-            style={!imgLoaded ? { visibility: "hidden" } : {}}
             onLoad={() => this.setState({ imgLoaded: true })}
-            className={classes.img}
+            className={ imgLoaded ? classes.img : classes.imgHide }
             src={backgroundImage3}
           />
         ) : (
           undefined
         )}
-
-        <div className={classes.scrollTo} onClick={this.scrollTo}>
-          <ImageToScroll {...this.state} />
-        </div>
       </React.Fragment>
     );
   }

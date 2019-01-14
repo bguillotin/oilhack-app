@@ -3,6 +3,10 @@ export default {
     img: {
         width: "100%",
         transition: "opacity 1s ease-in-out",
+        opacity: 1,
+    },
+    imgHide: {
+        opacity: 0,
     },
     scrollTo: {
         display: "flex",
@@ -12,8 +16,5 @@ export default {
     },
     pointer: {
         cursor: "pointer"
-    },
-    global: {
-        
     }
 }

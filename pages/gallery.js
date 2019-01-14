@@ -30,6 +30,13 @@ const styles = {
       }
     }
   },
+  divImage: {
+    display: "flex",
+    "& span": {
+      position: "absolute",
+      color: "white",
+    }
+  },
   child: {
     "& h1": {
       textAlign: "center"
@@ -68,6 +75,7 @@ class Gallery extends React.PureComponent {
       boardIndex: 0,
       boardName: "",
       imageArray: [],
+      hoverId: -1,
       visible: false
     };
   }
@@ -89,24 +97,22 @@ class Gallery extends React.PureComponent {
 
     return (
       <MainLayout>
-        {/* {this.state.isLoading ? "Data is Loading" : "Data loaded"} */}
         <div className={classes.main}>
-          <p className={classes.p}>This is the Gallery page</p>
           <ul className={classes.ul}>
             {" "}
             {this.props.boardList &&
               this.props.boardList.length > 0 &&
               this.props.boardList.map((x, index) => (
-                <li
+                <li onMouseOver={() => this.setState({ hoverId: x.id})}
                   className={classes.li}
                   key={index}
                   onClick={() => this.loadBoardImages(x.id, x.name)}
                 >
                   <a>
-                    <div>
+                    <div className={classes.divImage}>
                       <img src={x.image.medium.url} />
+                      { x.id === this.state.hoverId && (<span>{x.name}</span>) }
                     </div>
-                    <div>{x.name}</div>
                   </a>
                 </li>
               ))}
@@ -138,7 +144,7 @@ class Gallery extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   setBoardList: (boardList, nbBoard) => {
     dispatch(setBoardList(boardList, nbBoard));
   },

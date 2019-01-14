@@ -1,10 +1,11 @@
 import Sticky from "./Sticky";
 import Nav from './Nav';
+import { withRouter } from 'next/router';
 import { connect } from 'react-redux';
 import 'isomorphic-unfetch';
 import injectSheet from 'react-jss';
 import styles from './jss/header-style'
-import classNames from "classnames";
+import cx from "classnames";
 
 class Header extends React.Component {
   constructor(props){
@@ -12,13 +13,17 @@ class Header extends React.Component {
   }
 
   render() {
-    const { classes, isStickyHeader } = this.props;
-    let navClass = classNames(isStickyHeader ? classes.stickyHeader : classes.header, classes.background);
+    const { classes, router, isStickyHeader } = this.props;
+    let { pathname } = router;
+    const isDark = (pathname === "/");
+
+    const navClass = cx(classes.header, isStickyHeader && 'sticky');
+    const clsTitle = cx(classes.title, isDark && 'dark');
     const propsIsSticky = { isSticky : isStickyHeader };
 
     return (
       <header className={navClass}>
-        <span className={classes.title}>OILHACK</span>
+        <span className={clsTitle}>OILHACK</span>
         <Sticky><Nav {...propsIsSticky} /></Sticky>
       </header>
     );
@@ -27,4 +32,4 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => ({ isStickyHeader: state.isStickyHeader, position :state.position });
 
-export default connect(mapStateToProps)(injectSheet(styles)(Header));
+export default connect(mapStateToProps)(injectSheet(styles)(withRouter(Header)));

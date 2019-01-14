@@ -1,6 +1,9 @@
 export default {
   title: {
-    color: "white",
+    "&.dark": {
+      color: "white",
+    },
+    color: "black",
     position: "absolute",
     margin: "auto",
     top: "30px",
@@ -9,18 +12,16 @@ export default {
     fontSize: "32px",
   },
   header: {
-    backgroundColor: "#57EEF5",
+    "&.sticky": {
+      "& nav": {
+        background: "black",
+        color: "white",
+        width: "100%",
+        height: "50px",
+        position: "fixed",
+        zIndex: "60",
+        top: props => props.position,
+      },  
+    }
   },
-  stickyHeader: {
-    "& nav": {
-      background: "white",
-      color: "black",
-      width: "100%",
-      height: "50px",
-      position: "fixed",
-      zIndex: "60",
-      top: props => props.position,
-    },
-
-  }, 
 };
