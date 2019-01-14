@@ -1,7 +1,12 @@
 const express = require("express");
 const pinterestRouter = express.Router();
+const { readdir, unlink } = require("fs");
 const jsonfile = require("jsonfile");
 const path = require("path");
+const { promisify } = require("util");
+const readDirectory = promisify(readdir);
+const unlinkfile = promisify(unlink);
+
 // PINTEREST
 const PDK = require("node-pinterest");
 // Load environment variables from .env
@@ -9,7 +14,18 @@ require("dotenv").load();
 // PINTEREST env et setup.
 const { PINTEREST_TOKEN } = process.env;
 const pinterest = PDK.init(PINTEREST_TOKEN);
+// CONST
+const boardsPathFile = path.join("serverJSON", "boards.json");
+const boardImagesFolderPath = path.join("serverJSON", "boards");
 
+const deleteFiles = (files) => {
+  let promiseArray = [];
+  let errorMSG = [];
+  for (const file of files) {
+    promiseArray.push(unlinkfile(path.join(boardImagesFolderPath, file)));
+  }
+  return Promise.all(promiseArray);
+};
 // Middleware that is specific to this router
 pinterestRouter.use(function timeLog(req, res, next) {
   console.log("Time request pinterest: ", Date.now());
@@ -29,9 +45,57 @@ pinterestRouter.get("/me", function(req, res) {
     });
 });
 
-pinterestRouter.get("/update", function(req, res) {
-  // Define filePath.
-  const boardsPathFile = path.join("serverJSON", "boards.json");
+pinterestRouter.get("/clear", async (req, res) => {
+  let errorMSG = [];
+  let successMsgArray = [];
+  // Clear DATA before update.
+  const emptyObj = "";
+  // Create the file with boards DATA.
+  // emptyObj = JSON.stringify(emptyObj);
+  // Remove DATA in serverJSON/boards.json
+  jsonfile.writeFile(boardsPathFile, emptyObj, async (err, obj) => {
+    if (err) {
+      console.error(err);
+      errorMSG.push(err);
+    } else {
+      successMsgArray.push("boards.json file has been cleaned with success.");
+
+      // let {err, files} = await readDirectory(boardImagesFolderPath);
+      const files = await readDirectory(boardImagesFolderPath);
+
+      if (err) {
+        errorMSG.push(err);
+      } else {
+        if (files.length !== 0) {
+          let errorMSGOndelete = await deleteFiles(files);
+
+          if (errorMSGOndelete.length === 0) {
+            successMsgArray.push(
+              "All files in " + boardImagesFolderPath + "have been deleted."
+            );
+          } else {
+            errorMSG.concat(errorMSGOndelete);
+          }
+        } else {
+          successMsgArray.concat(
+            "No files to delete in " + boardImagesFolderPath
+          );
+        }
+      }
+    }
+
+    res.setHeader("content-type", "application/json");
+    if (errorMSG.length === 0) {
+      res.send(
+        JSON.stringify({ message: "OK ::: " + successMsgArray.join(" & ") })
+      );
+    } else {
+      res.send(JSON.stringify({ message: "KO ::: " + errorMSG.join(" & ") }));
+    }
+  });
+});
+
+pinterestRouter.get("/update", (req, res) => {
   // Check first if file in ../serverJSON/boards.json exist.
   jsonfile.readFile(boardsPathFile, (err, obj) => {
     if (!err || JSON.parse(obj) === "") {
@@ -73,7 +137,7 @@ pinterestRouter.get("/update", function(req, res) {
 });
 
 // Get all the boards.
-pinterestRouter.get("/boards", async function(req, res) {
+pinterestRouter.get("/boards", async (req, res) => {
   // Check first if file in ../serverJSON/boards.json exist.
   const boardsPathFile = path.join("serverJSON", "boards.json");
   // Read File and Get DATA.
@@ -87,16 +151,6 @@ pinterestRouter.get("/boards", async function(req, res) {
   });
 });
 
-// const getJSONFileObj = (fileNamePath) => {
-//   jsonfile.readFile(fileNamePath, (err, obj) => {
-//     if (err) {
-//       return '{"data":[]}';
-//     } else {
-//       return obj;
-//     }
-//   });
-// }
-
 // Get pins by board.
 pinterestRouter.get("/board/:boardId", function(req, res) {
   // var options = {
@@ -105,7 +159,11 @@ pinterestRouter.get("/board/:boardId", function(req, res) {
   //   }
   // };
   const boardId = req.params.boardId;
-  const fileNamePath = path.join("serverJSON", "boards", boardId.concat(".json"));
+  const fileNamePath = path.join(
+    "serverJSON",
+    "boards",
+    boardId.concat(".json")
+  );
 
   jsonfile.readFile(fileNamePath, (err, obj) => {
     if (!err) {
@@ -117,7 +175,7 @@ pinterestRouter.get("/board/:boardId", function(req, res) {
       const PIN_FIELDS = "id,image[medium]";
       const options = {
         qs: {
-          fields: PIN_FIELDS,
+          fields: PIN_FIELDS
         }
       };
 

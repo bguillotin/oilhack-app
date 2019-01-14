@@ -28,8 +28,8 @@ const styles = {
           background: "orange"
         }
       }
-    },
-  }, 
+    }
+  },
   child: {
     "& h1": {
       textAlign: "center"
@@ -51,7 +51,7 @@ const styles = {
           background: "orange"
         }
       }
-    },
+    }
   }
 };
 
@@ -138,7 +138,7 @@ class Gallery extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   setBoardList: (boardList, nbBoard) => {
     dispatch(setBoardList(boardList, nbBoard));
   },
