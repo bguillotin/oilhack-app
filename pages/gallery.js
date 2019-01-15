@@ -5,6 +5,7 @@ import { setBoardList, setImageListByBoardId } from "../js/action";
 import { loadBoards, loadImageListByBoardId } from "../js/utils/image-utils";
 import "isomorphic-unfetch";
 import injectSheet from "react-jss";
+import cx from "classnames";
 
 const styles = {
   main: {
@@ -25,16 +26,22 @@ const styles = {
         margin: "12px",
         borderRadius: "12px",
         "&:hover": {
-          background: "orange"
+          background: "grey"
         }
       }
     }
   },
   divImage: {
     display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     "& span": {
       position: "absolute",
-      color: "white",
+      color: "white"
+    },
+    "& img:hover": {
+      opacity: "0.1",
+      transition: "opacity 0.7s ease-out",
     }
   },
   child: {
@@ -55,7 +62,7 @@ const styles = {
         margin: "6px",
         borderRadius: "6px",
         "&:hover": {
-          background: "orange"
+          background: "grey"
         }
       }
     }
@@ -98,20 +105,24 @@ class Gallery extends React.PureComponent {
     return (
       <MainLayout>
         <div className={classes.main}>
-          <ul className={classes.ul}>
+          <ul>
             {" "}
             {this.props.boardList &&
               this.props.boardList.length > 0 &&
               this.props.boardList.map((x, index) => (
-                <li onMouseOver={() => this.setState({ hoverId: x.id})}
-                  className={classes.li}
+                <li
+                  onMouseOver={() => this.setState({ hoverId: x.id })}
                   key={index}
                   onClick={() => this.loadBoardImages(x.id, x.name)}
                 >
                   <a>
                     <div className={classes.divImage}>
                       <img src={x.image.medium.url} />
-                      { x.id === this.state.hoverId && (<span>{x.name}</span>) }
+                      {x.id === this.state.hoverId && (
+                        <span>
+                          <b>{x.name}</b>
+                        </span>
+                      )}
                     </div>
                   </a>
                 </li>

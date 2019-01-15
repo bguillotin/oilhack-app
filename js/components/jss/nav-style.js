@@ -22,26 +22,21 @@ export default {
     "& li": {
       marginRight: "12px",
       "& a": {
+        color: "black",
+        transition: "all 0.7s ease-out",
+        textDecoration: "none",
+        "&.dark, &.sticky" : {
+          color: "white",
+          transition: "all 0.7s ease-out",
+        },
         "&.activeLink": {
           color: "#EDAC30",
           transition: "all 0.7s ease-out",
         },
-        "&.inactiveLink" : {
-          color: "black",
-          transition: "all 0.7s ease-out",
-          "&.dark, &.sticky" : {
-            color: "white",
-            transition: "all 0.7s ease-out",
-          },
-        },
-        textDecoration: "none",
       },
-      "& a:visited": {},
       "& a:hover": {
-        "&.activeLink, &.inactiveLink": {
-          color: "#EDAC30"
-        }
-      }
+        color: "#EDAC30",
+      },
     }
   },
 };
