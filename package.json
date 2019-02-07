@@ -1,6 +1,6 @@
 {
   "name": "oilhack-app",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "The Oilhack art gallery",
   "dependencies": {
     "@u-wave/react-vimeo": "^0.5.0",

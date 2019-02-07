@@ -1,12 +1,14 @@
 export default {
   title: {
     display: "none",
+    letterSpacing: "15px",
+    cursor: "pointer",
     "&.sticky": {
-      position: "absolute",
-      fontSize: "32px",
-      marginLeft: "12px",
       display: "block",
-    } 
+      position: "absolute",
+      fontSize: "25px",
+      margin: "12px",
+    },
   },
   nav: {
     position: "absolute",
@@ -18,17 +20,18 @@ export default {
     display: "flex",
     listStyle: "none",
     justifyContent: "flex-end",
+    letterSpacing: "2px",
     marginRight: "24px",
     "& li": {
+      color: "black",
       marginRight: "12px",
+      "&.dark, &.sticky" : {
+        color: "white",
+        transition: "all 0.7s ease-out",
+      },
       "& a": {
-        color: "black",
         transition: "all 0.7s ease-out",
         textDecoration: "none",
-        "&.dark, &.sticky" : {
-          color: "white",
-          transition: "all 0.7s ease-out",
-        },
         "&.activeLink": {
           color: "#EDAC30",
           transition: "all 0.7s ease-out",

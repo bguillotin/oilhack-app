@@ -12,6 +12,7 @@ const nbImages = 4;
 let timeOutId;
 
 class RandomImage extends React.PureComponent {
+
   constructor(props) {
     super(props);
 

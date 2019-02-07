@@ -19,12 +19,12 @@ export default class JssDocument extends Document {
     render() {
         const style = {
             margin: "0px",
-            fontFamily: "'Noto Serif TC', serif",
+            fontFamily: "'Roboto', sans-serif",
         }
     return (
       <html>
         <Head>
-            <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet"></link>
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"></link>
             <style id="server-side-styles">
                 { this.props.registry.toString() }
             </style>

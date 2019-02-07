@@ -1,8 +1,9 @@
 export default {
   title: {
-    "&.dark": {
+    "&.darkTheme": {
       color: "white",
     },
+    letterSpacing: "15px",
     color: "black",
     position: "absolute",
     margin: "auto",
@@ -12,7 +13,7 @@ export default {
     fontSize: "32px",
   },
   header: {
-    "&.sticky": {
+    "&.stickyHeader": {
       "& nav": {
         background: "black",
         color: "white",

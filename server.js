@@ -7,7 +7,7 @@ const { parse } = require('url');
 const pinterestRouter = require('./serverRouter/pinterest-router');
 const vimeoRouter = require('./serverRouter/vimeo-router');
 
-const dev = process.env.NODE_ENV !== 'production';
+const dev = (process.env.NODE_ENV !== 'production');
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
@@ -29,8 +29,7 @@ nextApp.prepare()
     });
     
     expressApp.get('*', (req, res) => {
-        const parsedUrl = parse(req.url, true);
-        // const { pathname, query } = parsedUrl;        
+        // const { pathname, query } = parse(req.url, true);
         return handle(req, res);
     });
 

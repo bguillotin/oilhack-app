@@ -6,14 +6,14 @@ class Index extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      refToScrollTo: null
+      refScrolling: null
     };
   }
 
   render() {
     return (
       <MainLayout>
-        <RandomImage refToScrollTo={this.state.refToScrollTo} />
+        <RandomImage refScrolling={this.state.refScrolling} />
         <section>Videos --></section>
         <section>Gallery --></section>
         <section>About Me --></section>

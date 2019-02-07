@@ -18,7 +18,7 @@ class OilhackApp extends App {
     return (
         <Container>
           <Head>
-            <title>Oilhack website</title>
+            <title>Oilhack.org</title>
           </Head>
           <Provider store={reduxStore}>
               <Component {...pageProps} />

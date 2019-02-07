@@ -8,26 +8,27 @@ class Nav extends React.PureComponent {
   stringToHTMLBoldAndUpperCase = string => <b>{string.toUpperCase()}</b>;
 
   render() {
-    const { classes, router, isSticky } = this.props;
+    const { classes, router, isStickyHeader } = this.props;
     let { pathname } = router;
-    const isDark = pathname === "/";
+    const isDarkTheme = (pathname === "/");
     // Home - Video - Gallery - About - Contact
     const clsNav = cx(classes.nav);
     const clsUl = cx(classes.topMenu);
-    const clsTitle = cx(classes.title, isSticky && "sticky", isDark && "dark");
+    const clsTitle = cx(classes.title, isStickyHeader && "sticky", isDarkTheme && "dark");
 
     return (
       <React.Fragment>
         <nav className={clsNav}>
-          <span className={clsTitle}>OILHACK</span>
+        <Link href="/"><span className={clsTitle}>OILHACK</span></Link>
           <ul className={clsUl}>
-            <li>
+            <li className={cx(
+                    isDarkTheme && "dark",
+                    isStickyHeader && "sticky"
+                  )}>
               <Link href="/">
                 <a
                   className={cx(
                     router.pathname === "/" && "activeLink",
-                    isDark && "dark",
-                    isSticky && "sticky"
                   )}
                 >
                   {this.stringToHTMLBoldAndUpperCase("Home")}
@@ -39,8 +40,6 @@ class Nav extends React.PureComponent {
                 <a
                   className={cx(
                     router.pathname.includes("video") && "activeLink",
-                    isDark && "dark",
-                    isSticky && "sticky"
                   )}
                 >
                   {this.stringToHTMLBoldAndUpperCase("Video")}
@@ -52,8 +51,8 @@ class Nav extends React.PureComponent {
                 <a
                   className={cx(
                     router.pathname.includes("gallery") && "activeLink",
-                    isDark && "dark",
-                    isSticky && "sticky"
+                    isDarkTheme && "dark",
+                    isStickyHeader && "sticky"
                   )}
                 >
                   {this.stringToHTMLBoldAndUpperCase("Art Work")}
@@ -65,8 +64,8 @@ class Nav extends React.PureComponent {
                 <a
                   className={cx(
                     router.pathname.includes("about") && "activeLink",
-                    isDark && "dark",
-                    isSticky && "sticky"
+                    isDarkTheme && "dark",
+                    isStickyHeader && "sticky"
                   )}
                 >
                   {this.stringToHTMLBoldAndUpperCase("About Me")}
@@ -78,8 +77,8 @@ class Nav extends React.PureComponent {
                 <a
                   className={cx(
                     router.pathname.includes("contact") && "activeLink",
-                    isDark && "dark",
-                    isSticky && "sticky"
+                    isDarkTheme && "dark",
+                    isStickyHeader && "sticky"
                   )}
                 >
                   {this.stringToHTMLBoldAndUpperCase("Contact")}
