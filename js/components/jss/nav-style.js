@@ -23,23 +23,25 @@ export default {
     letterSpacing: "2px",
     marginRight: "24px",
     "& li": {
-      color: "black",
       marginRight: "12px",
-      "&.dark, &.sticky" : {
-        color: "white",
-        transition: "all 0.7s ease-out",
-      },
       "& a": {
+        color: "black",
         transition: "all 0.7s ease-out",
         textDecoration: "none",
+        "&.darkTheme, &.sticky" : {
+          color: "white",
+          transition: "all 0.7s ease-out",
+          "&:hover": {
+            color: "#EDAC30",
+          }
+        },
         "&.activeLink": {
           color: "#EDAC30",
-          transition: "all 0.7s ease-out",
         },
       },
       "& a:hover": {
         color: "#EDAC30",
       },
-    }
+    },
   },
 };

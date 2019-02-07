@@ -15,14 +15,14 @@ export default {
         height: "1000px",
     },
     sectionAbout: {
-        padding: "50px 0 0 0",
+        padding: "50px 12px 12px 12px",
         height: "1000px",
     },
     sectionGallery: {
-        padding: "50px 0 0 0",
+        padding: "50px 12px 12px 12px",
     },
     sectionContact: {
         height: "1000px",
-        padding: "50px 0 0 0",
+        padding: "50px 12px 12px 12px",
     },
 }

@@ -56,7 +56,7 @@ class VideoSlider extends React.PureComponent {
 
   goNext() {
     const { slideIndex } = this.state;
-    // Mute previous video in case it is running.
+    // Mute previous video in case it's running.
     this.props.videoList.get(slideIndex).muted = true;
 
     if (slideIndex + 1 <= this.props.nbVideo - 1) {
@@ -82,7 +82,7 @@ class VideoSlider extends React.PureComponent {
               className={this.getStyledShow(this.state.slideIndex === index)}
               key={index}
             >
-              <Vimeo video={video.id} height="540px" muted={video.muted} loop={true} />
+              <Vimeo video={video.id} height="720px" muted={video.muted} loop={true} />
             </li>
           ))}
           <a onClick={this.goNext} className={this.getStyledShow(this.state.sliderButtonStatus.nextIsShown)}>
