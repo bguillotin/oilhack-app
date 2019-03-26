@@ -1,6 +1,6 @@
 {
   "name": "oilhack-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The Oilhack art gallery",
   "dependencies": {
     "@u-wave/react-vimeo": "^0.5.0",
@@ -20,11 +20,10 @@
     "path": "^0.12.7",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-images-viewer": "^1.6.2",
     "react-jss": "^8.6.1",
     "react-loader-spinner": "^2.3.0",
     "react-redux": "^5.1.1",
-    "react-slick": "^0.23.2",
-    "react-viewer": "^2.8.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.6",
     "redux-thunk": "^2.3.0",

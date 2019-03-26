@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MainLayout from "../js/components/MainLayout";
+import Viewer from 'react-images-viewer'
 import { connect } from "react-redux";
 import { setBoardList, setImageListByBoardId } from "../js/action";
 import { loadBoards, loadImageListByBoardId } from "../js/utils/image-utils";
@@ -21,10 +22,7 @@ const styles = {
       "& li": {
         cursor: "pointer",
         padding: "12px",
-        background: "#E3BBFD",
         width: "min-content",
-        margin: "12px",
-        borderRadius: "12px",
         "&:hover": {
           background: "grey"
         }
@@ -57,10 +55,8 @@ const styles = {
       "& li": {
         cursor: "pointer",
         padding: "6px",
-        background: "#E3BBFD",
         width: "min-content",
         margin: "6px",
-        borderRadius: "6px",
         "&:hover": {
           background: "grey"
         }
@@ -74,6 +70,8 @@ class Gallery extends React.PureComponent {
     super(props);
 
     this.loadBoardImages = this.loadBoardImages.bind(this);
+    this.gotoPrevious = this.gotoPrevious.bind(this);
+    this.gotoNext = this.gotoNext.bind(this);
 
     this.state = {
       isLoadingBoards: false,
@@ -83,14 +81,23 @@ class Gallery extends React.PureComponent {
       boardName: "",
       imageArray: [],
       hoverId: -1,
-      visible: false
+      visible: false,
+      imageList: [],
+      imageListLength: 0,
+      currImg: 0,
     };
   }
 
   async loadBoardImages(boardId, boardName) {
     this.setState({ isLoadingBoards: true, boardName });
     await loadImageListByBoardId(this.props, boardId);
-    this.setState({ isLoadingBoards: false });
+    //[{ src: 'http://example.com/img1.jpg' }, { src: 'http://example.com/img2.png' }]
+    const imageList = this.props.imageList.reduce((acc, element) => {
+      acc.push({ src: element.image.original.url});
+      return acc;
+    }, []);
+    
+    this.setState({ imageListLength:this.props.nbImage, visible: true, isLoadingBoards: false, imageList });
   }
 
   async componentDidMount() {
@@ -99,6 +106,13 @@ class Gallery extends React.PureComponent {
     this.setState({ isLoadingBoards: false });
   }
 
+  gotoPrevious() {
+    this.setState({currImg : this.state.currImg -1});
+  }
+
+  gotoNext () {
+    this.setState({currImg : this.state.currImg +1});
+  }
   render() {
     const { classes } = this.props;
 
@@ -129,26 +143,20 @@ class Gallery extends React.PureComponent {
               ))}
           </ul>
         </div>
-
-        <div className={classes.child}>
-          {this.state.boardName && (
-            <h1>
-              {this.state.boardName} # {this.props.nbImage}
-            </h1>
-          )}
-          <ul className={classes.ul}>
-            {this.props.imageList &&
-              this.props.imageList.length > 0 &&
-              this.props.imageList.map((x, index) => (
-                <li className={classes.li} key={x.index}>
-                  <img src={x.image.medium.url} />
-                </li>
-              ))}
-          </ul>
-        </div>
+        { this.props.imageList &&
+          this.props.imageList.length > 0 &&
+          <Viewer
+            imgs={this.state.imageList }
+            currImg={this.state.currImg}
+            isOpen={this.state.visible}
+            onClickPrev={this.gotoPrevious}
+            onClickNext={this.gotoNext}
+            onClose={() => this.setState({ visible: false })}
+          />
+        }
 
         <Link href="/">
-          <a>Go home</a>
+          <a>Home</a>
         </Link>
       </MainLayout>
     );

@@ -5,7 +5,7 @@ export default () => (
   <MainLayout>
     <p>This is the Contact page</p>
     <Link href="/">
-      <a>Go home</a>
+      <a>Home</a>
     </Link>
   </MainLayout>
 );
