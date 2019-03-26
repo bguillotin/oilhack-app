@@ -12,7 +12,7 @@ export default {
     },
     sectionVideo: {
         padding: "50px 0 0 0",
-        height: "1000px",
+        //height: "1000px",
     },
     sectionAbout: {
         padding: "50px 12px 12px 12px",

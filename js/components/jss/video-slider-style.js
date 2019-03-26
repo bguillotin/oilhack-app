@@ -1,5 +1,6 @@
 export default {
     videoSlider: {
+        marginTop: "50px",
         "& ul": {
             display: "flex",
             flexDirection: "row",
